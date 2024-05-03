@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class ClienteService(private val clienteRepository: ClienteRepository) {
-    fun retornarClientePorCpf(id: String): Cliente {
-        return clienteRepository.getClientPorCpf(id)
+    fun retornarClientePorCpf(cpf: String): Cliente {
+        return clienteRepository.getClientPorCpf(cpf)
     }
 }
