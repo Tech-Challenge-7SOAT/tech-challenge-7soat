@@ -1,6 +1,6 @@
 package com.fiap.fastfood.adapter.driven.infra
 
-import com.fiap.fastfood.core.application.port.ClienteRepository
+import com.fiap.fastfood.core.application.port.repository.ClienteRepository
 import com.fiap.fastfood.core.domain.Cliente
 import org.springframework.stereotype.Repository
 import java.time.LocalDate
