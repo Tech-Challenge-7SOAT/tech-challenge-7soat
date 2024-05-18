@@ -9,7 +9,7 @@ interface CustomerRepositoryImpl : JpaRepository<CustomerData, String> {
 
     fun findByFirstNameAndLastName(firstName: String, lastName: String): Collection<CustomerData>
 
-//    fun existsByCpf(customerCpf: String): Collection<CustomerData>
-//
-//    fun findByCpf(customerCpf: String)
+    fun existsByCpf(customerCpf: String): Collection<CustomerData>
+
+    fun findByCpf(customerCpf: String)
 }

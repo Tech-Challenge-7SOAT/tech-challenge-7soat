@@ -9,8 +9,8 @@ import com.fiap.fastfood.core.domain.CustomerFunctions.customerFirstName
 import com.fiap.fastfood.core.domain.CustomerFunctions.customerLastName
 
 @Adapter
-abstract class ReadCustomerAdapter (private val customerRepository: CustomerRepositoryImpl,
-                                    private val customerJpaMapper: CustomerJpaMapper): ReadCustomerPort {
+class ReadCustomerAdapter (private val customerRepository: CustomerRepositoryImpl,
+                           private val customerJpaMapper: CustomerJpaMapper): ReadCustomerPort {
 
     override fun existsCustomerByName(customer: Customer): Boolean {
         val firstName: String = customerFirstName(customer)
@@ -18,16 +18,16 @@ abstract class ReadCustomerAdapter (private val customerRepository: CustomerRepo
         return customerRepository.findByFirstNameAndLastName(firstName, lastName).isNotEmpty()
     }
 
-//    override fun existsCustomerByCpf(customerCpf: CustomerCpf): Boolean {
-//        val cpf: String = customerCpf.toString()
-//        return customerRepository.existsByCpf(cpf).isNotEmpty()
-//    }
-//
-//    override fun fetchByCpf(customerCpf: CustomerCpf) =
-//        customerRepository.findByCpf(customerCpf.toString())
-//            .map { customerJpaMapper.toDomain(it) }
-//            .orElse(null)
-//            .toOption()
+    override fun existsCustomerByCpf(customerCpf: CustomerCpf): Boolean {
+        val cpf: String = customerCpf.toString()
+        return customerRepository.existsByCpf(cpf).isNotEmpty()
+    }
+
+    override fun fetchByCpf(customerCpf: CustomerCpf) =
+        customerRepository.findByCpf(customerCpf.toString())
+            .map { customerJpaMapper.toDomain(it) }
+            .orElse(null)
+            .toOption()
 
     override fun fetchAll() = customerRepository.findAll()
         .map { customerJpaMapper.toDomain(it) }
