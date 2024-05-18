@@ -1,6 +1,6 @@
 package com.fiap.fastfood.adapter.driven.infra
 
-import com.fiap.fastfood.core.application.port.PedidoRepository
+import com.fiap.fastfood.core.application.port.entrypoint.api.PedidoRepository
 import com.fiap.fastfood.core.domain.Pedido
 import org.springframework.stereotype.Repository
 

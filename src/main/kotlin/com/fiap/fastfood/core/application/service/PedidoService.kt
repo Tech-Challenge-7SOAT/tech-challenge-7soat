@@ -1,6 +1,6 @@
 package com.fiap.fastfood.core.application.service
 
-import com.fiap.fastfood.core.application.port.PedidoRepository
+import com.fiap.fastfood.core.application.port.entrypoint.api.PedidoRepository
 import com.fiap.fastfood.core.domain.Pedido
 import org.springframework.stereotype.Service
 
