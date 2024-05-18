@@ -7,7 +7,7 @@ import com.fiap.fastfood.core.application.usecase.CreateNewCustomerUseCase
 import org.springframework.stereotype.Component
 
 @Component
-abstract class CreateCustomerEndpointAdapter(
+class CreateCustomerEndpointAdapter(
     private val createNewCustomerUseCase: CreateNewCustomerUseCase,
     private val customerDtoMapper: CustomerDtoMapper): CreateCustomerPort {
 
