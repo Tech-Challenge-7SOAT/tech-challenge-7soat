@@ -13,21 +13,21 @@ import org.springframework.web.bind.annotation.RestController
 class OrderController(private val orderService: OrderService) {
     @GetMapping("/order/{id}")
     fun getOrder(@RequestParam id: String): Order {
-        return orderService.retornarPedidoPorId(id)
+        return orderService.fetchOrderById(id)
     }
 
     @PostMapping("/order")
     fun saveOrder(@RequestBody order: Order): Order {
-        return orderService.salvar(order)
+        return orderService.save(order)
     }
 
     @DeleteMapping("/order/{id}")
     fun deleteOrder(@RequestParam id: String) {
-        orderService.excluirPedidoPorId(id)
+        orderService.deleteOrderById(id)
     }
 
     @GetMapping("/")
     fun getOrders(): List<Order> {
-        return orderService.listarPedidos()
+        return orderService.listOrders()
     }
 }

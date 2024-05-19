@@ -11,13 +11,13 @@ import kotlin.jvm.optionals.getOrElse
 
 @Service
 class OrderServiceImpl(private val orderRepository: OrderRepository) : OrderService {
-    override fun retornarPedidoPorId(id: String): Order {
+    override fun fetchOrderById(id: String): Order {
         val orderEntity: Optional<OrderEntity> = orderRepository.findById(id)
 
         return orderEntity.getOrElse { throw Exception("Pedido não encontrado") }.convertToOrder()
     }
 
-    override fun salvar(order: Order): Order {
+    override fun save(order: Order): Order {
         try {
             if (order.hasCombo()) {
                 return orderRepository.save(order.convertToEntity()).convertToOrder()
@@ -29,7 +29,7 @@ class OrderServiceImpl(private val orderRepository: OrderRepository) : OrderServ
         }
     }
 
-    override fun excluirPedidoPorId(id: String) {
+    override fun deleteOrderById(id: String) {
         try {
             orderRepository.deleteById(id)
         } catch (e: Exception) {
@@ -37,7 +37,7 @@ class OrderServiceImpl(private val orderRepository: OrderRepository) : OrderServ
         }
     }
 
-    override fun listarPedidos(): List<Order> {
+    override fun listOrders(): List<Order> {
         try {
             return orderRepository.findAll().map { it.convertToOrder() }
         } catch (e: Exception) {
