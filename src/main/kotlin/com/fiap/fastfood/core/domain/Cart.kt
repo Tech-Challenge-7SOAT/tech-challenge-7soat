@@ -9,5 +9,5 @@ data class Cart(
     val id: String,
 
     @field:NotEmpty
-    val items: List<String> = TODO("implementar item de carrinho")
+    val items: List<CartItem>
 )

@@ -5,11 +5,13 @@ import com.fiap.fastfood.core.domain.Cart
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
+@Tag(name = "Checkout", description = "Finaliza o carrinho de compras")
 @RestController
 class CheckoutController(private val cartService: CartService) {
 
