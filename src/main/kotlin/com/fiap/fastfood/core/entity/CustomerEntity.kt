@@ -13,26 +13,26 @@ import java.time.LocalDateTime
 class CustomerEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    val id: String?,
+    private val id: String,
 
-    val cpf: String,
+    private val cpf: String,
 
-    val email: String,
+    private val email: String,
 
-    val phoneNumber: String,
+    private val phoneNumber: String,
 
     @OneToMany(mappedBy = "customer")
-    val orders: List<OrderEntity>?,
+    private val orders: List<OrderEntity>,
 
     @Column(name = "created_at")
     @CreatedDate
-    val createdAt: LocalDateTime?,
+    private val createdAt: LocalDateTime,
 
     @Column(name = "updated_at")
     @LastModifiedDate
-    val updatedAt: LocalDateTime?
+    private val updatedAt: LocalDateTime
 ) {
     fun toDomain(): Customer {
-        return Customer(id, cpf, email, phoneNumber, orders?.map { it.toDomain() }, createdAt, updatedAt)
+        return Customer(id, cpf, email, phoneNumber, orders.map { it.toDomain() }, createdAt, updatedAt)
     }
 }
