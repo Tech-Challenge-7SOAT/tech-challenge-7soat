@@ -1,22 +1,40 @@
 package com.fiap.fastfood.core.domain
 
+import com.fiap.fastfood.core.domain.enumeration.ProductCategory
 import com.fiap.fastfood.core.entity.ProductEntity
-import com.fiap.fastfood.core.valueObject.Category
-import java.time.LocalDateTime
+import jakarta.validation.constraints.Min
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
+import java.sql.Timestamp
 
 class Product(
-    private val id: String,
-    private val isActive: Boolean,
-    private val name: String,
-    private val description: String,
-    private val price: Double,
-    private val timeToPrepare: Int,
-    private val category: Category,
-    private val orders: List<Order>,
-    private val createdAt: LocalDateTime,
-    private val updatedAt: LocalDateTime
+    val id: Long,
+    var isActive: Boolean = true,
+    @field:NotBlank
+    var name: String,
+    @field:NotBlank
+    var description: String,
+    @field:NotNull
+    @field:Min(0)
+    var price: Double,
+    @field:NotNull
+    @field:Min(0)
+    var timeToPrepare: Int,
+    @field:NotBlank
+    var category: String,
+    val createdAt: Timestamp? = null,
+    val updatedAt: Timestamp? = null
 ) {
+
     fun toEntity(): ProductEntity {
-        return ProductEntity(id, isActive, name, description, price, timeToPrepare, category, orders.map { it.toEntity() }, createdAt, updatedAt);
+        return ProductEntity(
+            id = id,
+            isActive = isActive,
+            name = name,
+            description = description,
+            price = price,
+            timeToPrepare = timeToPrepare,
+            category = category
+        )
     }
 }

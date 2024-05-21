@@ -1,47 +1,62 @@
 package com.fiap.fastfood.core.entity
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fiap.fastfood.core.domain.Product
-import com.fiap.fastfood.core.valueObject.Category
+import com.fiap.fastfood.core.domain.enumeration.ProductCategory
 import jakarta.persistence.*
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
-import org.springframework.data.jpa.domain.support.AuditingEntityListener
-import java.time.LocalDateTime
+import java.sql.Timestamp
 
 @Entity
-@EntityListeners(AuditingEntityListener::class)
-@Table(name = "products")
+@Table(name = "tb_products")
 class ProductEntity(
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private val id: String,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true)
+    val id: Long = 0,
 
-    @Column(name = "is_active")
-    private val isActive: Boolean,
+    @Column(name = "is_active", nullable = false)
+    var isActive: Boolean = true,
 
-    private val name: String,
+    @Column(name = "name", nullable = false, unique = true)
+    var name: String = "",
 
-    private val description: String,
+    @Column(name = "description", nullable = false)
+    var description: String = "",
 
-    private val price: Double,
+    @Column(name = "price", nullable = false)
+    var price: Double = 0.0,
 
-    @Column(name = "time_to_prepare")
-    private val timeToPrepare: Int,
+    @Column(name = "time_to_prepare", nullable = false)
+    var timeToPrepare: Int = 0,
 
-    private val category: Category,
+//    @Enumerated(EnumType.STRING)
+    @Column(name = "category", nullable = false)
+    var category: String = "",
 
-    @ManyToMany(mappedBy = "products")
-    private val orders: List<OrderEntity>,
+    @CreationTimestamp
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
+    val createdAt: Timestamp? = null,
 
-    @Column(name = "created_at")
-    @CreatedDate
-    private val createdAt: LocalDateTime,
-
-    @Column(name = "updated_at")
-    @LastModifiedDate
-    private val updatedAt: LocalDateTime
+    @UpdateTimestamp
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
+    val updatedAt: Timestamp? = null
 ) {
+
     fun toDomain(): Product {
-        return Product(id, isActive, name, description, price, timeToPrepare, category, orders.map { it.toDomain() }, createdAt, updatedAt)
+        return Product(
+            id = id,
+            isActive = isActive,
+            name = name,
+            description = description,
+            price = price,
+            timeToPrepare = timeToPrepare,
+            category = category,
+            createdAt = createdAt,
+            updatedAt = updatedAt
+        )
     }
 }
