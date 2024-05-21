@@ -6,7 +6,7 @@ import com.fiap.fastfood.core.domain.Order
 import com.fiap.fastfood.core.entity.OrderEntity
 import com.fiap.fastfood.core.exception.OrderServiceException
 import org.springframework.stereotype.Service
-import java.util.Optional
+import java.util.*
 import kotlin.jvm.optionals.getOrElse
 
 @Service
@@ -14,13 +14,13 @@ class OrderServiceImpl(private val orderRepository: OrderRepository) : OrderServ
     override fun fetchOrderById(id: String): Order {
         val orderEntity: Optional<OrderEntity> = orderRepository.findById(id)
 
-        return orderEntity.getOrElse { throw Exception("Pedido não encontrado") }.convertToOrder()
+        return orderEntity.getOrElse { throw Exception("Pedido não encontrado") }.toDomain()
     }
 
     override fun save(order: Order): Order {
         try {
             if (order.hasCombo()) {
-                return orderRepository.save(order.convertToEntity()).convertToOrder()
+                return orderRepository.save(order.toEntity()).toDomain()
             }
 
             throw OrderServiceException("Pedido sem combo")
@@ -39,7 +39,7 @@ class OrderServiceImpl(private val orderRepository: OrderRepository) : OrderServ
 
     override fun listOrders(): List<Order> {
         try {
-            return orderRepository.findAll().map { it.convertToOrder() }
+            return orderRepository.findAll().map { it.toDomain() }
         } catch (e: Exception) {
             throw OrderServiceException("Erro ao listar pedidos")
         }

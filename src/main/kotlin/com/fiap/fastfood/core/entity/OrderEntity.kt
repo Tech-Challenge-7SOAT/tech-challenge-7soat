@@ -10,40 +10,40 @@ import java.time.LocalDateTime
 
 @Entity
 @EntityListeners(AuditingEntityListener::class)
+@Table(name = "orders")
 class OrderEntity(
-        @Id
-        @GeneratedValue(strategy = GenerationType.UUID)
-        private val id: String,
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private val id: String,
 
-        @Column(name = "total_amount", nullable = false)
-        private val totalAmount: Double,
+    @Column(name = "total_amount", nullable = false)
+    private val totalAmount: Double,
 
-        @Column(name = "customer_id", nullable = false)
-        @ManyToOne
-        @JoinColumn(name = "customer_id", referencedColumnName = "id")
-        private val customerId: String,
+    @ManyToOne
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private val customer: CustomerEntity,
 
-        private val isPayed: Boolean,
-        private val status: Status,
+    private val isPayed: Boolean,
 
-        @Column(nullable = false)
-        @ManyToMany
-        @JoinTable(
-                name = "combos",
-                joinColumns = [JoinColumn(name = "order_id", referencedColumnName = "id")],
-                inverseJoinColumns = [JoinColumn(name = "product_id", referencedColumnName = "id")]
-        )
-        private val products: List<Any>,
+    private val status: Status,
 
-        @Column(name = "created_at")
-        @CreatedDate
-        private var createdAt: LocalDateTime,
+    @ManyToMany
+    @JoinTable(
+        name = "combos",
+        joinColumns = [JoinColumn(name = "order_id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "product_id", referencedColumnName = "id")]
+    )
+    private val products: List<ProductEntity>,
 
-        @Column(name = "updated_at")
-        @LastModifiedDate
-        private var updatedAt: LocalDateTime
+    @Column(name = "created_at")
+    @CreatedDate
+    private val createdAt: LocalDateTime,
+
+    @Column(name = "updated_at")
+    @LastModifiedDate
+    private val updatedAt: LocalDateTime
 ) {
-    fun convertToOrder(): Order {
-        return Order(id, totalAmount, customerId, isPayed, status, products, createdAt, updatedAt)
+    fun toDomain(): Order {
+        return Order(id, totalAmount, customer.toDomain(), isPayed, status, products.map { it.toDomain() }, createdAt, updatedAt)
     }
 }
