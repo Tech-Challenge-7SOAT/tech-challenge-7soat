@@ -1,30 +1,27 @@
 package com.fiap.fastfood.adapter.driver.controller
 
-import com.fiap.fastfood.adapter.driver.controller.dto.CustomerDto
-import com.fiap.fastfood.adapter.driver.controller.dto.SaveCustomerBodyDto
-import com.fiap.fastfood.core.application.port.entrypoint.api.CreateCustomerPort
-import com.fiap.fastfood.core.application.port.entrypoint.api.FindCustomerPort
+import com.fiap.fastfood.core.application.port.CustomerInterface
+import com.fiap.fastfood.core.domain.Customer
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/customers")
-class CustomerController(private val changeCustomerPort: CreateCustomerPort,
-                         private val findCustomerPort: FindCustomerPort
-) {
+class CustomerController(private val customerInterface: CustomerInterface) {
 
-    @RequestMapping
+    @PostMapping("/customer")
     @ResponseStatus(HttpStatus.CREATED)
-    fun saveCustomer(@RequestBody @Valid saveCustomerBodyDto: SaveCustomerBodyDto) =
-        changeCustomerPort.saveCustomer(saveCustomerBodyDto)
+    fun saveCustomer(@RequestBody @Valid customer: Customer): Customer {
+        return customerInterface.saveNewCustomer(customer)
+    }
 
     @GetMapping("/{customer_cpf}")
     @ResponseStatus(HttpStatus.OK)
-    fun fetchCustomerByCpf(@PathVariable("customer_cpf") customerCpf: String ) =
-        findCustomerPort.fetchCustomerByCpf(customerCpf)
+    fun fetchCustomerByCpf(@PathVariable("customer_cpf") cpf: String ) =
+        customerInterface.fetchCustomerByCpf(cpf)
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    fun fetchAllCustomers(): Collection<CustomerDto> = findCustomerPort.fetchAllCustomers()
+    fun fetchAllCustomers(): Collection<Customer> = customerInterface.fetchAllCustomers()
 }
