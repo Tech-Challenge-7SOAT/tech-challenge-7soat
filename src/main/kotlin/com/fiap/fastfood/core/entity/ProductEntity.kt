@@ -13,7 +13,7 @@ class ProductEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
-    val id: Long = 0,
+    val id: Long? = null,
 
     @Column(name = "is_active", nullable = false)
     var isActive: Boolean = true,
