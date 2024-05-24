@@ -1,17 +1,17 @@
-FROM maven:3.6.0-jdk-8-alpine
+FROM openjdk:21-jdk
 
-ADD pom.xml /
+VOLUME /tmp
 
-RUN mvn verify clean
+RUN mkdir /work
 
-ADD . /
+COPY . /work
 
-RUN mvn package
+WORKDIR /work
 
-FROM openjdk:8-jdk-alpine
+RUN chmod +x ./mvnw
 
-WORKDIR /root/
+RUN ./mvnw clean package
 
-COPY --from=0 /target/*-jar-with-dependencies.jar app.jar
+RUN mv /work/build/libs/*.jar /work/app.jar
 
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "./app.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/work/app.jar"]
