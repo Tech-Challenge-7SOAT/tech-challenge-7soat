@@ -3,37 +3,42 @@ package com.fiap.fastfood.core.entity
 import com.fiap.fastfood.core.domain.Customer
 import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.LocalDateTime
 
 @Entity
-@EntityListeners(AuditingEntityListener::class)
-@Table(name = "customers")
+@Table(name = "tb_customers")
 class CustomerEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private val id: String,
+    @Column(name = "id", nullable = false, unique = true)
+    val id: Long = 0,
 
-    private val firstName: String,
+    @Column(name = "first_name", nullable = false)
+    var firstName: String = "",
 
-    private val lastName: String,
+    @Column(name = "last_name", nullable = false)
+    val lastName: String = "",
 
-    private val cpf: String,
+    @Column(name = "cpf", nullable = false)
+    val cpf: String = "",
 
-    private val email: String,
+    @Column(name = "email", nullable = false)
+    val email: String = "",
 
-    private val phoneNumber: String,
+    @Column(name = "phone_number", nullable = false)
+    val phoneNumber: String = "",
 
     @OneToMany(mappedBy = "customer")
-    private val orders: List<OrderEntity>,
+    @Column(name = "order", nullable = false)
+    val orders: List<OrderEntity>? = null,
 
     @Column(name = "created_at")
     @CreatedDate
-    private val createdAt: LocalDateTime,
+    val createdAt: LocalDateTime? = null,
 ) {
     fun toDomain(): Customer {
         return Customer(id, firstName, lastName, cpf, email, phoneNumber,
-            orders.map { it.toDomain() }, createdAt
+            orders?.map { it.toDomain() }, createdAt
         )
     }
 }
