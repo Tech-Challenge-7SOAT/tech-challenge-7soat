@@ -30,6 +30,7 @@ class ProductServiceImpl(
     }
 
     override fun update(id: Long, product: Product) {
+        validateProductCategory(product.category)
         findProductById(id)
         productRepository.save(product.toEntity()).toDomain()
     }
