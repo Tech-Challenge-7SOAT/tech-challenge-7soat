@@ -6,6 +6,7 @@ import jakarta.persistence.*
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
+import java.sql.Timestamp
 import java.time.LocalDateTime
 
 @Entity
@@ -14,10 +15,10 @@ import java.time.LocalDateTime
 class OrderEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private val id: String,
+    private val id: String?,
 
     @Column(name = "total_amount", nullable = false)
-    private val totalAmount: Double,
+    private val totalAmount: Double?,
 
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
@@ -37,13 +38,13 @@ class OrderEntity(
 
     @Column(name = "created_at")
     @CreatedDate
-    private val createdAt: LocalDateTime,
+    private val createdAt: Timestamp? = null,
 
     @Column(name = "updated_at")
     @LastModifiedDate
-    private val updatedAt: LocalDateTime
+    private val updatedAt: Timestamp? = null
 ) {
     fun toDomain(): Order {
-        return Order(id, totalAmount, customer.toDomain(), isPayed, status, products.map { it.toDomain() }, createdAt, updatedAt)
+        return Order(id, totalAmount!!, customer.id!!, isPayed, status, products.map { it.toDomain() }, createdAt, updatedAt)
     }
 }
