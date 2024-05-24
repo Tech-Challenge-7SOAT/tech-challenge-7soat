@@ -4,9 +4,9 @@ import com.fiap.fastfood.core.domain.Customer
 
 interface CustomerInterface {
 
-    fun fetchCustomerByCpf(cpf: String): Customer
-
     fun saveNewCustomer(customer: Customer): Customer
+
+    fun findByCpf(cpf: String): Customer
 
     fun fetchAllCustomers(): List<Customer>
 }
