@@ -1,15 +1,16 @@
 package com.fiap.fastfood.core.entity
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fiap.fastfood.core.domain.Customer
 import jakarta.persistence.*
-import org.springframework.data.annotation.CreatedDate
-import java.time.LocalDateTime
+import org.hibernate.annotations.CreationTimestamp
+import java.sql.Timestamp
 
 @Entity
 @Table(name = "tb_customers")
 class CustomerEntity(
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
     val id: Long = 0,
 
@@ -28,17 +29,19 @@ class CustomerEntity(
     @Column(name = "phone_number", nullable = false)
     val phoneNumber: String = "",
 
-    @OneToMany(mappedBy = "customer")
-    @Column(name = "order", nullable = false)
-    val orders: List<OrderEntity>? = null,
+//    @OneToMany(mappedBy = "order_id")
+//    @Column(name = "order", nullable = false)
+//    val orders: List<OrderEntity>? = null,
 
-    @Column(name = "created_at")
-    @CreatedDate
-    val createdAt: LocalDateTime? = null,
+    @CreationTimestamp
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
+    @Column(name = "create_at", nullable = false)
+    val createdAt: Timestamp? = null,
 ) {
     fun toDomain(): Customer {
         return Customer(id, firstName, lastName, cpf, email, phoneNumber,
-            orders?.map { it.toDomain() }, createdAt
+//            orders?.map { it.toDomain() },
+            createdAt
         )
     }
 }
