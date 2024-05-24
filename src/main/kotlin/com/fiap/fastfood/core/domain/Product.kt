@@ -1,6 +1,5 @@
 package com.fiap.fastfood.core.domain
 
-import com.fiap.fastfood.core.domain.enumeration.ProductCategory
 import com.fiap.fastfood.core.entity.ProductEntity
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
