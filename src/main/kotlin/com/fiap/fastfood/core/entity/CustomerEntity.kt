@@ -12,22 +12,22 @@ class CustomerEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
-    val id: Long = 0,
+    val id: Long,
 
     @Column(name = "first_name", nullable = false)
-    var firstName: String = "",
+    var firstName: String,
 
     @Column(name = "last_name", nullable = false)
-    val lastName: String = "",
+    val lastName: String,
 
     @Column(name = "cpf", nullable = false)
-    val cpf: String = "",
+    val cpf: String,
 
     @Column(name = "email", nullable = false)
-    val email: String = "",
+    val email: String,
 
     @Column(name = "phone_number", nullable = false)
-    val phoneNumber: String = "",
+    val phoneNumber: String,
 
 //    @OneToMany(mappedBy = "order_id")
 //    @Column(name = "order", nullable = false)
