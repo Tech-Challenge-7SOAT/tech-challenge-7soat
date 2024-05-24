@@ -25,6 +25,7 @@ class OrderServiceImpl(private val orderRepository: OrderRepository) : OrderServ
 
             throw OrderServiceException("Pedido sem combo")
         } catch (e: Exception) {
+            e.printStackTrace()
             throw OrderServiceException("Erro ao salvar pedido")
         }
     }
@@ -38,10 +39,12 @@ class OrderServiceImpl(private val orderRepository: OrderRepository) : OrderServ
     }
 
     override fun listOrders(): List<Order> {
-        try {
-            return orderRepository.findAll().map { it.toDomain() }
-        } catch (e: Exception) {
-            throw OrderServiceException("Erro ao listar pedidos")
+        val orders = orderRepository.findAll().map { it.toDomain() }
+
+        if (orders.isEmpty()) {
+            throw OrderServiceException("Nenhum pedido encontrado")
         }
+
+        return orders
     }
 }
