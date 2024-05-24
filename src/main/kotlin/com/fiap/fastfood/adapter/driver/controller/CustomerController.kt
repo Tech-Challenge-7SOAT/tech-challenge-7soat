@@ -2,10 +2,12 @@ package com.fiap.fastfood.adapter.driver.controller
 
 import com.fiap.fastfood.core.application.port.CustomerInterface
 import com.fiap.fastfood.core.domain.Customer
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
+@Tag(name = "Customer", description = "Create and search customer by cpf.")
 @RestController
 @RequestMapping("/customers")
 class CustomerController(private val customerInterface: CustomerInterface) {
