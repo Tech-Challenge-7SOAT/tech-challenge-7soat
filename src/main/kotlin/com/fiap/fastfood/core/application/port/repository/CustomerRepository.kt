@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface CustomerRepository : JpaRepository<CustomerEntity, String> {
     fun findByCpf(cpf: String): CustomerEntity?
+    fun existsByCpf(cpf: String): Boolean
 }

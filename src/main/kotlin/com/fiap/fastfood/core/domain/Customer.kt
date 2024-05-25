@@ -2,19 +2,23 @@ package com.fiap.fastfood.core.domain
 
 import com.fiap.fastfood.core.entity.CustomerEntity
 import jakarta.validation.constraints.Email
-import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.NotBlank
 import java.sql.Timestamp
 
 data class Customer(
     val id: Long,
+    @field:NotBlank
     val firstName: String,
+    @NotBlank
     val lastName: String,
-    @field:NotEmpty
+    @field:NotBlank
     val cpf: String,
+    @field:NotBlank
     @Email
     val email: String,
+    @field:NotBlank
     val phoneNumber: String,
-//    val orders: Timestamp? = emptyList(),
+//    val orders: List<Order>?,
     val createdAt: Timestamp? = null,
 )  {
     fun toEntity(): CustomerEntity {

@@ -13,6 +13,10 @@ class CustomerService(private val customerRepository: CustomerRepository) : Cust
         return customerRepository.save(customer.toEntity()).toDomain()
     }
 
+    override fun existsByCpf(cpf: String): Boolean {
+        return customerRepository.existsByCpf(cpf)
+    }
+
     override fun findByCpf(cpf: String): Customer {
         try {
             return customerRepository.findByCpf(cpf)!!.toDomain()
