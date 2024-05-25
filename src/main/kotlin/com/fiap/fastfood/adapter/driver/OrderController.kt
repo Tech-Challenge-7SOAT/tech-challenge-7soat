@@ -2,37 +2,72 @@ package com.fiap.fastfood.adapter.driver
 
 import com.fiap.fastfood.core.application.port.service.OrderService
 import com.fiap.fastfood.core.domain.Order
-import com.fiap.fastfood.core.exception.OrderServiceException
-import org.springframework.http.HttpStatus
+import com.fiap.fastfood.core.valueObject.Status
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+@Tag(name = "Order", description = "Create, remove, edit and search orders by status")
 @RestController
 @RequestMapping("/orders")
 class OrderController(private val orderService: OrderService) {
     @GetMapping("/order/{id}")
-    fun getOrder(@PathVariable id: String): Order {
-        return orderService.fetchOrderById(id)
+    @Operation(summary = "Get order for the given id")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Order found"),
+            ApiResponse(responseCode = "400", description = "Invalid id type"),
+            ApiResponse(responseCode = "404", description = "Order not found"),
+            ApiResponse(responseCode = "500", description = "Internal server error")
+        ]
+    )
+    fun getOrder(@PathVariable id: Long): ResponseEntity<Any> {
+        return ResponseEntity.ok(orderService.findOrderById(id))
     }
 
     @PostMapping("/order")
-    fun saveOrder(@RequestBody order: Order): Order {
-        return orderService.save(order)
+    @Operation(summary = "Create a new order")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Order updated"),
+            ApiResponse(responseCode = "201", description = "Order created"),
+            ApiResponse(responseCode = "400", description = "Bad Request"),
+            ApiResponse(responseCode = "500", description = "Internal server error")
+        ]
+    )
+    fun saveOrder(@RequestBody order: Order): ResponseEntity<Any> {
+        return ResponseEntity.ok(orderService.save(order))
     }
 
     @DeleteMapping("/order/{id}")
-    fun deleteOrder(@PathVariable id: String) {
+    @Operation(summary = "Delete a order for the given id")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "204", description = "Order deleted"),
+            ApiResponse(responseCode = "400", description = "Invalid id type"),
+            ApiResponse(responseCode = "404", description = "Order not found"),
+            ApiResponse(responseCode = "500", description = "Internal server error")
+        ]
+    )
+    fun deleteOrder(@PathVariable id: Long): ResponseEntity<Any> {
         orderService.deleteOrderById(id)
+
+        return ResponseEntity.noContent().build()
     }
 
     @GetMapping("/")
-    fun getOrders(): ResponseEntity<Any> {
-        try {
-            val orders = orderService.listOrders()
-            println(orders.size)
-            return ResponseEntity.status(HttpStatus.OK).body(orders)
-        } catch (orderServiceException: OrderServiceException) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(orderServiceException.message)
-        }
+    @Operation(summary = "Get all orders")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Orders retrieved"),
+            ApiResponse(responseCode = "404", description = "No orders found"),
+            ApiResponse(responseCode = "500", description = "Internal server error")
+        ]
+    )
+    fun getOrders(@RequestParam status: Status?): ResponseEntity<Any> {
+        return ResponseEntity.ok(orderService.listOrders(status))
     }
 }

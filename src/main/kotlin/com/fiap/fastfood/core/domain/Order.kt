@@ -6,15 +6,19 @@ import jakarta.validation.constraints.NotEmpty
 import java.sql.Timestamp
 
 class Order(
-    val id: String? = null,
-    val totalAmount: Double,
-    val customerId: String,
+    val id: Long? = null,
+    val customer: Customer,
     val isPayed: Boolean,
     val status: Status,
     @field:NotEmpty val products: List<Product>,
     val createdAt: Timestamp? = null,
     val updatedAt: Timestamp? = null
 ) {
+    var totalAmount: Double = 0.0
+        set(_) {
+            field = products.map { it.price }.sum().toDouble()
+        }
+
     fun hasCombo(): Boolean {
         return this.products.isNotEmpty()
     }
@@ -23,7 +27,7 @@ class Order(
         return OrderEntity(
             id,
             totalAmount,
-            Customer(customerId, null.toString(), null.toString(), null.toString(), null, null, null).toEntity(),
+            customer.toEntity(),
             isPayed,
             status,
             products.map { it.toEntity() },

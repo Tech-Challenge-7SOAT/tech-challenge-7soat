@@ -1,38 +1,57 @@
 package com.fiap.fastfood.core.entity
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fiap.fastfood.core.domain.Customer
 import jakarta.persistence.*
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
-import org.springframework.data.jpa.domain.support.AuditingEntityListener
-import java.time.LocalDateTime
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
+import java.sql.Timestamp
 
 @Entity
-@EntityListeners(AuditingEntityListener::class)
-@Table(name = "customers")
+@Table(name = "tb_customers")
 class CustomerEntity(
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    val id: String?,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true)
+    val id: Long,
 
+    @Column(name = "first_name", nullable = false)
+    var firstName: String,
+
+    @Column(name = "last_name", nullable = false)
+    val lastName: String,
+
+    @Column(name = "cpf", nullable = false)
     val cpf: String,
 
+    @Column(name = "email", nullable = false)
     val email: String,
 
+    @Column(name = "phone_number", nullable = false)
     val phoneNumber: String,
 
-    @OneToMany(mappedBy = "customer")
-    val orders: List<OrderEntity>?,
+    @CreationTimestamp
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
+    @Column(name = "create_at", nullable = false)
+    val createdAt: Timestamp? = null,
 
-    @Column(name = "created_at")
-    @CreatedDate
-    val createdAt: LocalDateTime?,
-
-    @Column(name = "updated_at")
-    @LastModifiedDate
-    val updatedAt: LocalDateTime?
+    @UpdateTimestamp
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
+    @Column(name = "updated_at", nullable = false)
+    val updatedAt: Timestamp? = null
 ) {
+    constructor() : this(
+        -1L,
+        "",
+        "",
+        "",
+        "",
+        "",
+        null,
+        null
+    )
+
     fun toDomain(): Customer {
-        return Customer(id, cpf, email, phoneNumber, orders?.map { it.toDomain() }, createdAt, updatedAt)
+        return Customer(id, firstName, lastName, cpf, email, phoneNumber, createdAt, updatedAt)
     }
 }

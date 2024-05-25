@@ -1,18 +1,25 @@
 package com.fiap.fastfood.core.domain
 
 import com.fiap.fastfood.core.entity.CustomerEntity
-import java.time.LocalDateTime
+import jakarta.validation.constraints.Email
+import jakarta.validation.constraints.NotEmpty
+import java.sql.Timestamp
 
-class Customer(
-    private val id: String?,
-    private val cpf: String,
-    private val email: String,
-    private val phoneNumber: String,
-    private val orders: List<Order>?,
-    private val createdAt: LocalDateTime?,
-    private val updatedAt: LocalDateTime?
-) {
+data class Customer(
+    val id: Long,
+    val firstName: String,
+    val lastName: String,
+    @field:NotEmpty
+    val cpf: String,
+    @Email
+    val email: String,
+    val phoneNumber: String,
+    val createdAt: Timestamp? = null,
+    val updatedAt: Timestamp? = null
+)  {
     fun toEntity(): CustomerEntity {
-        return CustomerEntity(id, cpf, email, phoneNumber, orders?.map { it.toEntity() }, createdAt, updatedAt)
+        return CustomerEntity(id, firstName, lastName, cpf, email, phoneNumber
+//            orders!!.map { it.toEntity() },
+        )
     }
 }

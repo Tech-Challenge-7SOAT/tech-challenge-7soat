@@ -15,19 +15,19 @@ import java.sql.Timestamp
 class OrderEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private val id: Long?,
+    val id: Long?,
 
     @Column(name = "total_amount", nullable = false)
-    private val totalAmount: Double?,
+    val totalAmount: Double?,
 
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private val customer: CustomerEntity,
+    val customer: CustomerEntity,
 
     @Column(name = "is_payed")
-    private val isPayed: Boolean = false,
+    val isPayed: Boolean = false,
 
-    private val status: Status,
+    val status: Status,
 
     @ManyToMany
     @JoinTable(
@@ -35,19 +35,30 @@ class OrderEntity(
         joinColumns = [JoinColumn(name = "order_id", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "product_id", referencedColumnName = "id")]
     )
-    private val products: List<ProductEntity>,
+    val products: List<ProductEntity>,
 
     @Column(name = "created_at")
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
-    private val createdAt: Timestamp? = null,
+    val createdAt: Timestamp? = null,
 
     @Column(name = "updated_at")
     @UpdateTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
-    private val updatedAt: Timestamp? = null
+    val updatedAt: Timestamp? = null
 ) {
+    constructor() : this(
+        -1L,
+        null,
+        CustomerEntity(),
+        false,
+        Status.PENDENTE,
+        emptyList(),
+        null,
+        null
+    )
+
     fun toDomain(): Order {
-        return Order(id, totalAmount!!, customer.id!!, isPayed, status, products.map { it.toDomain() }, createdAt, updatedAt)
+        return Order(id, customer.toDomain(), isPayed, status, products.map { it.toDomain() }, createdAt, updatedAt)
     }
 }

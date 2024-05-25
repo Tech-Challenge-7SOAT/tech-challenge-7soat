@@ -1,10 +1,11 @@
 package com.fiap.fastfood.core.application.port.service
 
 import com.fiap.fastfood.core.domain.Order
+import com.fiap.fastfood.core.valueObject.Status
 
 interface OrderService {
-   fun fetchOrderById(id: String): Order
-   fun save(order: Order): Order
-   fun deleteOrderById(id: String)
-   fun listOrders(): List<Order>
+    fun findOrderById(id: Long): Order
+    fun save(order: Order): Order
+    fun deleteOrderById(id: Long)
+    fun listOrders(status: Status?): List<Order>
 }
