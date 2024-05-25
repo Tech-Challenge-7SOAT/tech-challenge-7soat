@@ -1,21 +1,21 @@
 package com.fiap.fastfood.core.entity
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fiap.fastfood.core.domain.Order
 import com.fiap.fastfood.core.valueObject.Status
 import jakarta.persistence.*
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.sql.Timestamp
-import java.time.LocalDateTime
 
 @Entity
 @EntityListeners(AuditingEntityListener::class)
-@Table(name = "orders")
+@Table(name = "tb_orders")
 class OrderEntity(
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private val id: String?,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private val id: Long?,
 
     @Column(name = "total_amount", nullable = false)
     private val totalAmount: Double?,
@@ -24,24 +24,27 @@ class OrderEntity(
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private val customer: CustomerEntity,
 
-    private val isPayed: Boolean,
+    @Column(name = "is_payed")
+    private val isPayed: Boolean = false,
 
     private val status: Status,
 
     @ManyToMany
     @JoinTable(
-        name = "combos",
+        name = "tb_combos",
         joinColumns = [JoinColumn(name = "order_id", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "product_id", referencedColumnName = "id")]
     )
     private val products: List<ProductEntity>,
 
     @Column(name = "created_at")
-    @CreatedDate
+    @CreationTimestamp
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
     private val createdAt: Timestamp? = null,
 
     @Column(name = "updated_at")
-    @LastModifiedDate
+    @UpdateTimestamp
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
     private val updatedAt: Timestamp? = null
 ) {
     fun toDomain(): Order {
