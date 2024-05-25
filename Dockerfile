@@ -1,17 +1,21 @@
-FROM maven:3.6.0-jdk-8-alpine
+FROM openjdk:17-jdk-alpine
 
-ADD pom.xml /
+VOLUME /tmp
 
-RUN mvn verify clean
+RUN mkdir /work
 
-ADD . /
+COPY . /work
 
-RUN mvn package
+WORKDIR /work
 
-FROM openjdk:8-jdk-alpine
+RUN apk add --no-cache dos2unix
 
-WORKDIR /root/
+RUN dos2unix ./mvnw && chmod +x ./mvnw
 
-COPY --from=0 /target/*-jar-with-dependencies.jar app.jar
+RUN ./mvnw clean package -DskipTests
 
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "./app.jar"]
+EXPOSE 8080
+
+RUN mv /work/target/fastfood-api-0.0.1-SNAPSHOT.jar /work/app.jar
+
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/work/app.jar"]
