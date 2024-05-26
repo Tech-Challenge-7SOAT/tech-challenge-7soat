@@ -33,28 +33,28 @@ class ExceptionController {
         return ResponseEntity.status(e.httpStatus).body(ExceptionResponse(e.httpStatus, e.message))
     }
 
-    @ExceptionHandler(InternalServerErrorException::class) //TODO
+    @ExceptionHandler(InternalServerErrorException::class)
     fun handleInternalServerErrorException(e: InternalServerErrorException): ResponseEntity<ExceptionResponse> {
         return ResponseEntity.status(e.httpStatus).body(ExceptionResponse(e.httpStatus, e.message))
     }
 
-    @ExceptionHandler(MissingPathVariableException::class) //When a path variable is not provided
+    @ExceptionHandler(MissingPathVariableException::class)
     fun handleMissingPathVariableException(e: MissingPathVariableException): ResponseEntity<ExceptionResponse> {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionResponse(HttpStatus.BAD_REQUEST.value(), "Product id is required"))
     }
 
-    @ExceptionHandler(MissingServletRequestParameterException::class) //When a request param is not provided
+    @ExceptionHandler(MissingServletRequestParameterException::class)
     fun handleMissingRequestParamException(e: MissingServletRequestParameterException): ResponseEntity<ExceptionResponse> {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionResponse(HttpStatus.BAD_REQUEST.value(), "Category parameter is required"))
     }
 
-    @ExceptionHandler(DataIntegrityViolationException::class) //TODO
+    @ExceptionHandler(DataIntegrityViolationException::class)
     fun handleDataIntegrityViolationException(ex: DataIntegrityViolationException): ResponseEntity<ExceptionResponse> {
         val errorMessage = "Integrity Violation Exception"
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ExceptionResponse(HttpStatus.CONFLICT.value(), ex.message ?: errorMessage))
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException::class) //TODO
+    @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleMethodArgumentNotValidException(ex: MethodArgumentNotValidException): ResponseEntity<ExceptionResponse> {
         val errorMessage = "Method Argument Not Valid Exception"
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionResponse(HttpStatus.BAD_REQUEST.value(), ex.message ?: errorMessage))

@@ -1,6 +1,5 @@
 package com.fiap.fastfood.core.domain
 
-import com.fiap.fastfood.core.domain.enumeration.ProductCategory
 import com.fiap.fastfood.core.entity.ProductEntity
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
@@ -8,7 +7,7 @@ import jakarta.validation.constraints.NotNull
 import java.sql.Timestamp
 
 class Product(
-    val id: Long,
+    val id: Long? = null,
     var isActive: Boolean = true,
     @field:NotBlank
     var name: String,
@@ -28,7 +27,6 @@ class Product(
 
     fun toEntity(): ProductEntity {
         return ProductEntity(
-            id = id,
             isActive = isActive,
             name = name,
             description = description,

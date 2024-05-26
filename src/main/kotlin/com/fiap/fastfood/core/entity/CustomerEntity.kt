@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import com.fiap.fastfood.core.domain.Customer
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
-import org.hibernate.annotations.UpdateTimestamp
 import java.sql.Timestamp
 
 @Entity
@@ -34,24 +33,10 @@ class CustomerEntity(
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
     @Column(name = "create_at", nullable = false)
     val createdAt: Timestamp? = null,
-
-    @UpdateTimestamp
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
-    @Column(name = "updated_at", nullable = false)
-    val updatedAt: Timestamp? = null
 ) {
-    constructor() : this(
-        -1L,
-        "",
-        "",
-        "",
-        "",
-        "",
-        null,
-        null
-    )
-
+  
     fun toDomain(): Customer {
-        return Customer(id, firstName, lastName, cpf, email, phoneNumber, createdAt, updatedAt)
+        return Customer(id, firstName, lastName, cpf, email, phoneNumber, createdAt
+        )
     }
 }

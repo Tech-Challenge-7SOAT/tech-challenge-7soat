@@ -2,12 +2,9 @@ package com.fiap.fastfood.core.entity
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fiap.fastfood.core.domain.Product
-import com.fiap.fastfood.core.domain.enumeration.ProductCategory
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
 import java.sql.Timestamp
 
 @Entity
@@ -16,7 +13,7 @@ class ProductEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
-    val id: Long = 0,
+    val id: Long? = null,
 
     @Column(name = "is_active", nullable = false)
     var isActive: Boolean = true,
@@ -33,16 +30,17 @@ class ProductEntity(
     @Column(name = "time_to_prepare", nullable = false)
     var timeToPrepare: Int = 0,
 
-//    @Enumerated(EnumType.STRING)
     @Column(name = "category", nullable = false)
     var category: String = "",
 
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
+    @Column(name = "created_at")
     val createdAt: Timestamp? = null,
 
     @UpdateTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
+    @Column(name = "updated_at")
     val updatedAt: Timestamp? = null
 ) {
 
