@@ -29,19 +29,14 @@ class CustomerEntity(
     @Column(name = "phone_number", nullable = false)
     val phoneNumber: String,
 
-//    @OneToMany(mappedBy = "order_id")
-//    @Column(name = "order", nullable = false)
-//    val orders: List<OrderEntity>? = null,
-
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
     @Column(name = "create_at", nullable = false)
     val createdAt: Timestamp? = null,
 ) {
+  
     fun toDomain(): Customer {
-        return Customer(id, firstName, lastName, cpf, email, phoneNumber,
-//            orders?.map { it.toDomain() },
-            createdAt
+        return Customer(id, firstName, lastName, cpf, email, phoneNumber, createdAt
         )
     }
 }

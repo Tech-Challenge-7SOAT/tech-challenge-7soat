@@ -7,23 +7,18 @@ import java.sql.Timestamp
 
 data class Customer(
     val id: Long,
-    @field:NotBlank
     val firstName: String,
-    @NotBlank
     val lastName: String,
-    @field:NotBlank
+    @field:NotEmpty
     val cpf: String,
-    @field:NotBlank
     @Email
     val email: String,
-    @field:NotBlank
     val phoneNumber: String,
-//    val orders: List<Order>?,
     val createdAt: Timestamp? = null,
+    val updatedAt: Timestamp? = null
 )  {
     fun toEntity(): CustomerEntity {
         return CustomerEntity(id, firstName, lastName, cpf, email, phoneNumber
-//            orders!!.map { it.toEntity() },
         )
     }
 }

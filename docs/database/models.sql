@@ -1,20 +1,14 @@
-CREATE TABLE "pedidos" (
+CREATE TABLE "orders" (
   "id" uuid PRIMARY KEY,
   "total_amount" double NOT NULL,
   "customer_id" uuid,
   "isPayed" bool,
   "status" enum,
   "created_at" timestamp,
-  "updated_at" timestamp,
-  "created_by" uuid,
-  "updated_by" uuid
+  "updated_at" timestamp
 );
 
-CREATE TABLE "status" (
-  "status" enum NOT NULL
-);
-
-CREATE TABLE "produtos" (
+CREATE TABLE "products" (
   "id" uuid PRIMARY KEY,
   "category" enum,
   "price" double,
@@ -23,43 +17,29 @@ CREATE TABLE "produtos" (
   "isActive" bool,
   "time_to_prepare" integer,
   "created_at" timestamp,
-  "updated_at" timestamp,
-  "created_by" uuid,
-  "updated_by" uuid
-);
-
-CREATE TABLE "categories" (
-  "category" enum
+  "updated_at" timestamp
 );
 
 CREATE TABLE "combos" (
   "id" uuid PRIMARY KEY,
-  "pedido_id" uuid,
-  "produto_id" uuid,
+  "order_id" uuid,
+  "product_id" uuid,
   "created_at" timestamp,
-  "updated_at" timestamp,
-  "created_by" uuid,
-  "updated_by" uuid
+  "updated_at" timestamp
 );
 
-CREATE TABLE "clientes" (
+CREATE TABLE "customers" (
   "id" uuid PRIMARY KEY,
   "first_name" varchar,
   "last_name" varchar NOT NULL,
   "cpf" varchar UNIQUE,
   "email" varchar NOT NULL,
   "created_at" timestamp,
-  "updated_at" timestamp,
-  "created_by" uuid,
-  "updated_by" uuid
+  "updated_at" timestamp
 );
 
-ALTER TABLE "combos" ADD FOREIGN KEY ("pedido_id") REFERENCES "pedidos" ("id");
+ALTER TABLE "combos" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("id");
 
-ALTER TABLE "combos" ADD FOREIGN KEY ("produto_id") REFERENCES "produtos" ("id");
+ALTER TABLE "combos" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
 
-ALTER TABLE "pedidos" ADD FOREIGN KEY ("customer_id") REFERENCES "clientes" ("id");
-
-ALTER TABLE "pedidos" ADD FOREIGN KEY ("status") REFERENCES "status" ("status");
-
-ALTER TABLE "produtos" ADD FOREIGN KEY ("category") REFERENCES "categories" ("category");
+ALTER TABLE "orders" ADD FOREIGN KEY ("customer_id") REFERENCES "customers" ("id");
