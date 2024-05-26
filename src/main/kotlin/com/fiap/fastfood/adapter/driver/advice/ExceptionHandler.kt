@@ -19,4 +19,9 @@ class ExceptionHandler : ResponseEntityExceptionHandler() {
     fun handleOrderNotFoundException(e: OrderNotFoundException): ResponseEntity<Any> {
         return ResponseEntity(e.message, HttpStatus.NOT_FOUND)
     }
+
+    @ExceptionHandler()
+    fun handleIllegalArgumentException(e: IllegalArgumentException): ResponseEntity<Any> {
+        return ResponseEntity("Order id cannot be null", HttpStatus.BAD_REQUEST)
+    }
 }

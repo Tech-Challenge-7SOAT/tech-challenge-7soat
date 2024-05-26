@@ -42,6 +42,23 @@ class OrderController(private val orderService: OrderService) {
         return ResponseEntity.ok(orderService.save(order))
     }
 
+    @PutMapping("/order")
+    @Operation(summary = "Edit an order")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Order updated"),
+            ApiResponse(responseCode = "400", description = "Bad Request"),
+            ApiResponse(responseCode = "500", description = "Internal server error")
+        ]
+    )
+    fun editOrder(@RequestBody order: Order): ResponseEntity<Any> {
+        if (order.id == null) {
+            throw IllegalArgumentException()
+        }
+
+        return ResponseEntity.ok(orderService.save(order))
+    }
+
     @DeleteMapping("/order/{id}")
     @Operation(summary = "Delete a order for the given id")
     @ApiResponses(
