@@ -1,7 +1,21 @@
-# docker build . -f PostgresDockerfile -t postgres:7soat
-# docker run -d -p 5432:5432 --name soat7_db postgres:7soat
-# psql -h localhost -p 5432 -U postgres
-FROM postgres:latest
-ENV POSTGRES_USER postgres
-ENV POSTGRES_PASSWORD 7soat
-ENV POSTGRES_DB 7soat
+FROM openjdk:17-jdk-alpine
+
+VOLUME /tmp
+
+RUN mkdir /work
+
+COPY . /work
+
+WORKDIR /work
+
+RUN apk add --no-cache dos2unix
+
+RUN dos2unix ./mvnw && chmod +x ./mvnw
+
+RUN ./mvnw clean package -DskipTests
+
+EXPOSE 8080
+
+RUN mv /work/target/fastfood-api-0.0.1-SNAPSHOT.jar /work/app.jar
+
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/work/app.jar"]
