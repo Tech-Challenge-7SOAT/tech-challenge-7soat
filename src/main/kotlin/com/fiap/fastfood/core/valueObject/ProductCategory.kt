@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.domain.enumeration
+package com.fiap.fastfood.core.valueObject
 
 enum class ProductCategory{
     LANCHE,

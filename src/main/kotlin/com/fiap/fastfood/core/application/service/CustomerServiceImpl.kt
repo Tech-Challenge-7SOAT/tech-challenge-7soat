@@ -1,13 +1,13 @@
 package com.fiap.fastfood.core.application.service
 
-import com.fiap.fastfood.core.application.port.CustomerInterface
+import com.fiap.fastfood.core.application.port.service.CustomerService
 import com.fiap.fastfood.core.application.port.repository.CustomerRepository
 import com.fiap.fastfood.core.domain.Customer
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Service
 
 @Service
-class CustomerService(private val customerRepository: CustomerRepository) : CustomerInterface {
+class CustomerServiceImpl(private val customerRepository: CustomerRepository) : CustomerService {
 
     override fun saveNewCustomer(customer: Customer): Customer {
         return customerRepository.save(customer.toEntity()).toDomain()

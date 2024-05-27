@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.application.port.service
+package com.fiap.fastfood.core.application.service
 
 import com.fiap.fastfood.core.domain.Cart
 import org.springframework.stereotype.Service

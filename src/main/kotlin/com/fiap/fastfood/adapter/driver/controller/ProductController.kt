@@ -2,7 +2,6 @@ package com.fiap.fastfood.adapter.driver.controller
 
 import com.fiap.fastfood.core.application.port.service.ProductService
 import com.fiap.fastfood.core.domain.Product
-import com.fiap.fastfood.core.domain.enumeration.ProductCategory
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses

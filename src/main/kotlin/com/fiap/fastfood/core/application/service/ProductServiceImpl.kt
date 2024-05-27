@@ -3,7 +3,7 @@ package com.fiap.fastfood.core.application.service
 import com.fiap.fastfood.core.application.port.repository.ProductRepository
 import com.fiap.fastfood.core.application.port.service.ProductService
 import com.fiap.fastfood.core.domain.Product
-import com.fiap.fastfood.core.domain.enumeration.ProductCategory
+import com.fiap.fastfood.core.valueObject.ProductCategory
 import com.fiap.produto.exception.InvalidProductCategoryException
 import com.fiap.produto.exception.ProductNotFoundByCategoryException
 import com.fiap.produto.exception.ProductNotFoundException

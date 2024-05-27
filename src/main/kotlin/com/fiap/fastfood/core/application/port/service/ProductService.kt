@@ -2,7 +2,7 @@ package com.fiap.fastfood.core.application.port.service
 
 import com.fiap.fastfood.core.domain.Product
 
-open interface ProductService {
+interface ProductService {
 
     fun create(product: Product)
 

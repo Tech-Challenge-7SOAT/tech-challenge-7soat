@@ -1,8 +1,8 @@
-package com.fiap.fastfood.core.application.port
+package com.fiap.fastfood.core.application.port.service
 
 import com.fiap.fastfood.core.domain.Customer
 
-interface CustomerInterface {
+interface CustomerService {
 
     fun saveNewCustomer(customer: Customer): Customer
 

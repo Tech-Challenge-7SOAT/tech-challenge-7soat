@@ -1,6 +1,6 @@
 package com.fiap.fastfood.adapter.driver.controller
 
-import com.fiap.fastfood.core.application.port.CustomerInterface
+import com.fiap.fastfood.core.application.port.service.CustomerService
 import com.fiap.fastfood.core.application.port.repository.CustomerRepository
 import com.fiap.fastfood.core.domain.Customer
 import io.swagger.v3.oas.annotations.Operation
@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException
 @RestController
 @RequestMapping("/customers")
 class CustomerController(
-    private val customerInterface: CustomerInterface,
+    private val customerService: CustomerService,
     private val customerRepository: CustomerRepository
 ) {
 
@@ -35,7 +35,7 @@ class CustomerController(
                 HttpStatus.BAD_REQUEST, "Customer with this CPF already exists."
             )
         }
-        return customerInterface.saveNewCustomer(customer)
+        return customerService.saveNewCustomer(customer)
     }
 
     @GetMapping("/customer/{cpf}")
@@ -51,7 +51,7 @@ class CustomerController(
                 HttpStatus.NOT_FOUND, "Customer with this CPF does not exist."
             )
         }
-        return customerInterface.findByCpf(cpf)
+        return customerService.findByCpf(cpf)
     }
 
     @GetMapping
@@ -60,5 +60,5 @@ class CustomerController(
         ApiResponse(responseCode = "200", description = "Returns a list with all customers of database."),
         ApiResponse(responseCode = "500", description = "When it is not possible to find a list of customers.")
     ])
-    fun fetchAllCustomers(): Collection<Customer> = customerInterface.fetchAllCustomers()
+    fun fetchAllCustomers(): Collection<Customer> = customerService.fetchAllCustomers()
 }

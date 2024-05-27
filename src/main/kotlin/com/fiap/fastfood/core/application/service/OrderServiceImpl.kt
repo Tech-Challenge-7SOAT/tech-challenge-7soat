@@ -25,10 +25,10 @@ class OrderServiceImpl(private val orderRepository: OrderRepository) : OrderServ
                 return orderRepository.save(order.toEntity()).toDomain()
             }
 
-            throw OrderServiceException("Pedido sem combo")
+            throw OrderServiceException("Order without combo")
         } catch (e: Exception) {
             e.printStackTrace()
-            throw OrderServiceException("Erro ao salvar pedido")
+            throw OrderServiceException("Error saving order")
         }
     }
 
@@ -36,7 +36,7 @@ class OrderServiceImpl(private val orderRepository: OrderRepository) : OrderServ
         try {
             orderRepository.deleteById(id)
         } catch (e: Exception) {
-            throw OrderServiceException("Erro ao excluir pedido")
+            throw OrderServiceException("Error deleting order")
         }
     }
 
