@@ -12,13 +12,12 @@ import java.sql.Timestamp
 class ProductEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
     val id: Long? = null,
 
     @Column(name = "is_active", nullable = false)
     var isActive: Boolean = true,
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
     var name: String = "",
 
     @Column(name = "description", nullable = false)

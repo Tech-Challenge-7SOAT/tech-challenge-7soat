@@ -19,7 +19,6 @@ data class Customer(
     val updatedAt: Timestamp? = null
 )  {
     fun toEntity(): CustomerEntity {
-        return CustomerEntity(id, firstName, lastName, cpf, email, phoneNumber
-        )
+        return CustomerEntity(id, firstName, lastName, cpf, email, phoneNumber)
     }
 }

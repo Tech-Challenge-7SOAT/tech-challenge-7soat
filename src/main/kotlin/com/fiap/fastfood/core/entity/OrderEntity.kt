@@ -1,6 +1,7 @@
 package com.fiap.fastfood.core.entity
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fiap.fastfood.core.domain.Order
 import com.fiap.fastfood.core.valueObject.Status
 import jakarta.persistence.*
@@ -20,22 +21,22 @@ class OrderEntity(
     @Column(name = "total_amount", nullable = false)
     val totalAmount: Double?,
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    val customer: CustomerEntity,
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+    var customer: CustomerEntity?,
 
     @Column(name = "is_payed")
     val isPayed: Boolean = false,
 
     val status: Status,
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "tb_combos",
         joinColumns = [JoinColumn(name = "order_id", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "product_id", referencedColumnName = "id")]
     )
-    val products: List<ProductEntity>,
+    var products: List<ProductEntity>,
 
     @Column(name = "created_at")
     @CreationTimestamp
@@ -50,7 +51,7 @@ class OrderEntity(
     constructor() : this(
         -1L,
         null,
-        CustomerEntity(),
+        CustomerEntity(-1L, "", "", "", "", ""),
         false,
         Status.PENDENTE,
         emptyList(),
@@ -59,6 +60,6 @@ class OrderEntity(
     )
 
     fun toDomain(): Order {
-        return Order(id, customer.toDomain(), isPayed, status, products.map { it.toDomain() }, createdAt, updatedAt)
+        return Order(id, customer?.toDomain(), isPayed, status, products.map { it.toDomain() }, createdAt, updatedAt)
     }
 }

@@ -35,15 +35,15 @@ class CustomerEntity(
     val createdAt: Timestamp? = null,
 ) {
 
-    constructor() : this(
-        -1L,
-        "",
-        "",
-        "",
-        "",
-        "",
-        null
-    )
+//    constructor() : this(
+//        -1L,
+//        "",
+//        "",
+//        "",
+//        "",
+//        "",
+//        null
+//    )
   
     fun toDomain(): Customer {
         return Customer(id, firstName, lastName, cpf, email, phoneNumber, createdAt

@@ -7,16 +7,21 @@ import java.sql.Timestamp
 
 class Order(
     val id: Long? = null,
-    val customer: Customer,
+    val customer: Customer?,
     val isPayed: Boolean,
     val status: Status,
     @field:NotEmpty val products: List<Product>,
     val createdAt: Timestamp? = null,
     val updatedAt: Timestamp? = null
 ) {
-    var totalAmount: Double = 0.0
-        set(_) {
-            field = products.map { it.price }.sum().toDouble()
+    val totalAmount: Double
+        get() {
+            return products.sumOf { it.price }
+        }
+
+    val timeToPrepare: Int
+        get() {
+            return products.sumOf { it.timeToPrepare }
         }
 
     fun hasCombo(): Boolean {
@@ -27,7 +32,7 @@ class Order(
         return OrderEntity(
             id,
             totalAmount,
-            customer.toEntity(),
+            customer?.toEntity(),
             isPayed,
             status,
             products.map { it.toEntity() },
