@@ -57,10 +57,10 @@ class ProductController(
         ApiResponse(responseCode = "500", description = "When it is not possible to update the product")
     ])
     fun updateProduct(
-        @PathVariable productId: Long,
+        @PathVariable id: Long,
         @Valid @RequestBody productBody: Product
     ): ResponseEntity<Any> {
-        productService.update(productId, productBody)
+        productService.update(id, productBody)
 
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }
@@ -73,9 +73,9 @@ class ProductController(
         ApiResponse(responseCode = "500", description = "When it is not possible to delete the product")
     ])
     fun removeProduct(
-        @PathVariable productId: Long
+        @PathVariable id: Long
     ): ResponseEntity<Any> {
-        productService.delete(productId)
+        productService.delete(id)
 
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }

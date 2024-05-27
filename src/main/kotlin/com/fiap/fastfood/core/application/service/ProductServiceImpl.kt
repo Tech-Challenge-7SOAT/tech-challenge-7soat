@@ -3,6 +3,7 @@ package com.fiap.fastfood.core.application.service
 import com.fiap.fastfood.core.application.port.repository.ProductRepository
 import com.fiap.fastfood.core.application.port.service.ProductService
 import com.fiap.fastfood.core.domain.Product
+import com.fiap.fastfood.core.entity.ProductEntity
 import com.fiap.fastfood.core.valueObject.ProductCategory
 import com.fiap.produto.exception.InvalidProductCategoryException
 import com.fiap.produto.exception.ProductNotFoundByCategoryException
@@ -26,13 +27,26 @@ class ProductServiceImpl(
         val products = productRepository.findByCategory(category.uppercase())
         val productsMap = products.map { it.toDomain() }
         return productsMap.takeIf { it.isNotEmpty() }
-            ?: throw ProductNotFoundByCategoryException("No products found for category <$category>", HttpStatus.NOT_FOUND.value())
+            ?: throw ProductNotFoundByCategoryException(
+                "No products found for category <$category>",
+                HttpStatus.NOT_FOUND.value()
+            )
     }
 
     override fun update(id: Long, product: Product) {
         validateProductCategory(product.category)
-        findProductById(id)
-        productRepository.save(product.toEntity()).toDomain()
+        productRepository.findById(id)
+            .map {
+                productRepository.save(
+                    ProductEntity(
+                        id = id,
+                        name = product.name,
+                        category = product.category,
+                        description = product.description,
+                        price = product.price
+                    )
+                )
+            }.orElseThrow { ProductNotFoundException("Product <$id> not found", HttpStatus.NOT_FOUND.value()) }
     }
 
     override fun delete(id: Long) {
@@ -41,8 +55,11 @@ class ProductServiceImpl(
     }
 
     fun validateProductCategory(category: String) {
-        ProductCategory.values().find { it.name == category.uppercase() }
-            ?: throw InvalidProductCategoryException("$category is not a valid category", HttpStatus.BAD_REQUEST.value())
+        ProductCategory.entries.find { it.name == category.uppercase() }
+            ?: throw InvalidProductCategoryException(
+                "$category is not a valid category",
+                HttpStatus.BAD_REQUEST.value()
+            )
     }
 
     fun findProductById(id: Long) {
