@@ -1,4 +1,4 @@
-package com.fiap.fastfood.adapter.driver
+package com.fiap.fastfood.adapter.driver.controller
 
 import com.fiap.fastfood.core.application.port.service.CartService
 import com.fiap.fastfood.core.domain.Cart

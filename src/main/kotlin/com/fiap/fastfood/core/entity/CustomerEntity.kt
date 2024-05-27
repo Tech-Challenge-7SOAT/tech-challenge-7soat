@@ -34,6 +34,16 @@ class CustomerEntity(
     @Column(name = "create_at", nullable = false)
     val createdAt: Timestamp? = null,
 ) {
+
+    constructor() : this(
+        -1L,
+        "",
+        "",
+        "",
+        "",
+        "",
+        null
+    )
   
     fun toDomain(): Customer {
         return Customer(id, firstName, lastName, cpf, email, phoneNumber, createdAt

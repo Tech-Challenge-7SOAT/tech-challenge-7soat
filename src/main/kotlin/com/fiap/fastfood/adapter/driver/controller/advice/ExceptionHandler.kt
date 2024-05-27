@@ -1,4 +1,4 @@
-package com.fiap.fastfood.adapter.driver.advice
+package com.fiap.fastfood.adapter.driver.controller.advice
 
 import com.fiap.fastfood.core.exception.InvalidIdTypeException
 import com.fiap.fastfood.core.exception.OrderNotFoundException

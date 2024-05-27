@@ -25,13 +25,6 @@ class ObjectMapperConfig {
             addModule(kotlinModule())
             configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         }
-//        val javaTimeModule = JavaTimeModule()
-//        javaTimeModule.addDeserializer(LocalDateTime::class.java, LocalDateTimeDeserializer(DateTimeFormatter.ISO_DATE_TIME))
-//
-//        val objectMapper = ObjectMapper()
-//        objectMapper.registerModule(javaTimeModule)
-//        objectMapper.registerModule(kotlinModule())
-//        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
 
         return mapper
     }

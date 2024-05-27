@@ -1,4 +1,4 @@
-package com.fiap.fastfood.adapter.driver
+package com.fiap.fastfood.adapter.driver.controller
 
 import com.fiap.fastfood.core.application.port.service.ProductService
 import com.fiap.fastfood.core.domain.Product
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*
 
 @Tag(name = "Product", description = "Create, remove, edit and search products by category.")
 @RestController
+@RequestMapping("/products")
 class ProductController(
     val productService: ProductService
 ) {
@@ -34,7 +35,7 @@ class ProductController(
         return ResponseEntity("Product created successfully", HttpStatus.CREATED)
     }
 
-    @GetMapping("/product")
+    @GetMapping
     @Operation(summary = "Find products by category")
     @ApiResponses(value = [
         ApiResponse(responseCode = "200", description = "Returns a list of products based on the specified category"),
@@ -49,7 +50,7 @@ class ProductController(
         return productService.findByCategory(category)
     }
 
-    @PatchMapping("/product/{productId}")
+    @PatchMapping("/product/{id}")
     @Operation(summary = "Edit a product")
     @ApiResponses(value = [
         ApiResponse(responseCode = "204", description = "Product edited successfully"),
@@ -65,7 +66,7 @@ class ProductController(
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }
 
-    @DeleteMapping("/product/{productId}")
+    @DeleteMapping("/product/{id}")
     @Operation(summary = "Delete a product")
     @ApiResponses(value = [
         ApiResponse(responseCode = "204", description = "Product deleted successfully"),
