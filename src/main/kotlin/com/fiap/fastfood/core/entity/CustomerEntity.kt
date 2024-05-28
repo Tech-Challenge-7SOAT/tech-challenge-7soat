@@ -31,22 +31,10 @@ class CustomerEntity(
 
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
-    @Column(name = "create_at", nullable = false)
+    @Column(name = "created_at", nullable = false)
     val createdAt: Timestamp? = null,
 ) {
-
-//    constructor() : this(
-//        -1L,
-//        "",
-//        "",
-//        "",
-//        "",
-//        "",
-//        null
-//    )
-  
     fun toDomain(): Customer {
-        return Customer(id, firstName, lastName, cpf, email, phoneNumber, createdAt
-        )
+        return Customer(id, firstName, lastName, cpf, email, phoneNumber, createdAt)
     }
 }
