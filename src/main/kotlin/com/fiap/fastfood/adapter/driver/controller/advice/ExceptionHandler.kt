@@ -18,12 +18,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 class ExceptionHandler: ResponseEntityExceptionHandler() {
-
-    @ExceptionHandler(InvalidProductCategoryException::class)
-    fun handleInvalidProductCategoryException(e: InvalidProductCategoryException): ResponseEntity<ExceptionResponse> {
-        return ResponseEntity.status(e.httpStatus).body(ExceptionResponse(e.httpStatus, e.message))
-    }
-
     @ExceptionHandler(ProductNotFoundByCategoryException::class)
     fun handleProductNotFoundByCategoryException(e: ProductNotFoundByCategoryException): ResponseEntity<ExceptionResponse> {
         return ResponseEntity.status(e.httpStatus).body(ExceptionResponse(e.httpStatus, e.message))
@@ -63,15 +57,15 @@ class ExceptionHandler: ResponseEntityExceptionHandler() {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ExceptionResponse(HttpStatus.BAD_REQUEST.value(), errorMessage))
     }
 
-//    @ExceptionHandler(ResponseStatusException::class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    fun handleResponseStatusException(ex: ResponseStatusException): ResponseEntity<ExceptionResponse> {
-//        ex.printStackTrace()
-//
-//        val errorResponse = ExceptionResponse(
-//            httpCode = ex.statusCode.value(),
-//            message = ex.reason ?: "Unexpected error"
-//        )
-//        return ResponseEntity(errorResponse, ex.statusCode)
-//    }
+    @ExceptionHandler(ResponseStatusException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun handleResponseStatusException(ex: ResponseStatusException): ResponseEntity<ExceptionResponse> {
+        ex.printStackTrace()
+
+        val errorResponse = ExceptionResponse(
+            httpCode = ex.statusCode.value(),
+            message = ex.reason ?: "Unexpected error"
+        )
+        return ResponseEntity(errorResponse, ex.statusCode)
+    }
 }

@@ -30,7 +30,7 @@ class OrderEntity(
 
     val status: Status,
 
-    @ManyToMany
+    @ManyToMany(cascade = [CascadeType.ALL])
     @JoinTable(
         name = "tb_combos",
         joinColumns = [JoinColumn(name = "order_id")],

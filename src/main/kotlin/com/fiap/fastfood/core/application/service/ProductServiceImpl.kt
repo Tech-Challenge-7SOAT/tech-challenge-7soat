@@ -5,11 +5,11 @@ import com.fiap.fastfood.core.application.port.service.ProductService
 import com.fiap.fastfood.core.domain.Product
 import com.fiap.fastfood.core.entity.ProductEntity
 import com.fiap.fastfood.core.valueObject.ProductCategory
-import com.fiap.produto.exception.InvalidProductCategoryException
 import com.fiap.produto.exception.ProductNotFoundByCategoryException
 import com.fiap.produto.exception.ProductNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
+import java.sql.Timestamp
 
 @Service
 class ProductServiceImpl(
@@ -17,16 +17,15 @@ class ProductServiceImpl(
 ) : ProductService {
 
     override fun create(product: Product) {
-        validateProductCategory(product.category)
         val productEntity = product.toEntity()
         productRepository.save(productEntity).toDomain()
     }
 
-    override fun findByCategory(category: String): List<Product> {
-        validateProductCategory(category)
-        val products = productRepository.findByCategory(category.uppercase())
-        val productsMap = products.map { it.toDomain() }
-        return productsMap.takeIf { it.isNotEmpty() }
+    override fun findByCategory(category: ProductCategory): List<Product> {
+        return productRepository.findByCategory(category)
+            .filter { it.isActive }
+            .map { it.toDomain() }
+            .takeIf { it.isNotEmpty() }
             ?: throw ProductNotFoundByCategoryException(
                 "No products found for category <$category>",
                 HttpStatus.NOT_FOUND.value()
@@ -34,7 +33,6 @@ class ProductServiceImpl(
     }
 
     override fun update(id: Long, product: Product) {
-        validateProductCategory(product.category)
         val existingProduct = productRepository.findById(id)
             .orElseThrow { ProductNotFoundException("Product <$id> not found", HttpStatus.NOT_FOUND.value()) }
 
@@ -50,20 +48,16 @@ class ProductServiceImpl(
     }
 
     override fun delete(id: Long) {
-        findProductById(id)
-        productRepository.deleteById(id)
-    }
-
-    fun validateProductCategory(category: String) {
-        ProductCategory.entries.find { it.name == category.uppercase() }
-            ?: throw InvalidProductCategoryException(
-                "$category is not a valid category",
-                HttpStatus.BAD_REQUEST.value()
+        val product = findProductById(id)
+            .copy(
+                deletedAt = Timestamp(System.currentTimeMillis()),
+                isActive = false
             )
+        productRepository.save(product)
     }
 
-    fun findProductById(id: Long) {
-        productRepository.findById(id)
+    fun findProductById(id: Long): ProductEntity {
+        return productRepository.findById(id)
             .orElseThrow { throw ProductNotFoundException("Product <$id> not found", HttpStatus.NOT_FOUND.value()) }
     }
 }

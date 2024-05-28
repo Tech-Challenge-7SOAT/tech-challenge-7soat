@@ -1,6 +1,7 @@
 package com.fiap.fastfood.core.domain
 
 import com.fiap.fastfood.core.entity.ProductEntity
+import com.fiap.fastfood.core.valueObject.ProductCategory
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
@@ -19,8 +20,7 @@ class Product(
     @field:NotNull
     @field:Min(0)
     var timeToPrepare: Int,
-    @field:NotBlank
-    var category: String,
+    val category: ProductCategory,
     val createdAt: Timestamp? = null,
     val updatedAt: Timestamp? = null
 ) {

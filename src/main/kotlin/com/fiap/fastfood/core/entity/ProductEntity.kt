@@ -2,6 +2,7 @@ package com.fiap.fastfood.core.entity
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fiap.fastfood.core.domain.Product
+import com.fiap.fastfood.core.valueObject.ProductCategory
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
@@ -9,7 +10,7 @@ import java.sql.Timestamp
 
 @Entity
 @Table(name = "tb_products")
-class ProductEntity(
+data class ProductEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -26,14 +27,15 @@ class ProductEntity(
     @Column(name = "price", nullable = false)
     var price: Double = 0.0,
 
-    @ManyToMany(mappedBy = "products")
+    @ManyToMany(mappedBy = "products", cascade = [CascadeType.REMOVE])
     val order: MutableList<OrderEntity> = mutableListOf(),
 
     @Column(name = "time_to_prepare", nullable = false)
     var timeToPrepare: Int = 0,
 
     @Column(name = "category", nullable = false)
-    var category: String = "",
+    @Enumerated(EnumType.STRING)
+    var category: ProductCategory,
 
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
@@ -43,9 +45,12 @@ class ProductEntity(
     @UpdateTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
     @Column(name = "updated_at")
-    val updatedAt: Timestamp? = null
-) {
+    val updatedAt: Timestamp? = null,
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
+    @Column(name = "deleted_at")
+    val deletedAt: Timestamp? = null
+) {
     fun toDomain(): Product {
         return Product(
             id = id,

@@ -2,6 +2,7 @@ package com.fiap.fastfood.adapter.driver.controller
 
 import com.fiap.fastfood.core.application.port.service.ProductService
 import com.fiap.fastfood.core.domain.Product
+import com.fiap.fastfood.core.valueObject.ProductCategory
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
@@ -43,7 +44,7 @@ class ProductController(
         ApiResponse(responseCode = "500", description = "When it is not possible to find the product")
     ])
     fun findProductsByCategory(
-        @RequestParam(required = true) category: String
+        @RequestParam(required = true) category: ProductCategory
     ): List<Product> {
 
         return productService.findByCategory(category)
