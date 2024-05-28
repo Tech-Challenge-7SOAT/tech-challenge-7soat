@@ -35,18 +35,18 @@ class ProductServiceImpl(
 
     override fun update(id: Long, product: Product) {
         validateProductCategory(product.category)
-        productRepository.findById(id)
-            .map {
-                productRepository.save(
-                    ProductEntity(
-                        id = id,
-                        name = product.name,
-                        category = product.category,
-                        description = product.description,
-                        price = product.price
-                    )
-                )
-            }.orElseThrow { ProductNotFoundException("Product <$id> not found", HttpStatus.NOT_FOUND.value()) }
+        val existingProduct = productRepository.findById(id)
+            .orElseThrow { ProductNotFoundException("Product <$id> not found", HttpStatus.NOT_FOUND.value()) }
+
+        existingProduct.apply {
+            name = product.name
+            category = product.category
+            description = product.description
+            price = product.price
+            timeToPrepare = product.timeToPrepare
+        }
+
+        productRepository.save(existingProduct)
     }
 
     override fun delete(id: Long) {
