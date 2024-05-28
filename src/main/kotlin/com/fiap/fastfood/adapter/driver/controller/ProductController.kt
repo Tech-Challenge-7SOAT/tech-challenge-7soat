@@ -43,7 +43,7 @@ class ProductController(
         ApiResponse(responseCode = "500", description = "When it is not possible to find the product")
     ])
     fun findProductsByCategory(
-        @RequestParam category: String
+        @RequestParam(required = true) category: String
     ): List<Product> {
 
         return productService.findByCategory(category)
@@ -57,7 +57,7 @@ class ProductController(
         ApiResponse(responseCode = "500", description = "When it is not possible to update the product")
     ])
     fun updateProduct(
-        @PathVariable id: Long,
+        @PathVariable(required = true) id: Long,
         @Valid @RequestBody productBody: Product
     ): ResponseEntity<Any> {
         productService.update(id, productBody)
@@ -73,7 +73,7 @@ class ProductController(
         ApiResponse(responseCode = "500", description = "When it is not possible to delete the product")
     ])
     fun removeProduct(
-        @PathVariable id: Long
+        @PathVariable(required = true) id: Long
     ): ResponseEntity<Any> {
         productService.delete(id)
 
