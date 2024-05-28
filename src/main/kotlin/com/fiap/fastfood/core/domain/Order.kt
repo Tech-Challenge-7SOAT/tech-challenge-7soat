@@ -5,7 +5,7 @@ import com.fiap.fastfood.core.valueObject.Status
 import jakarta.validation.constraints.NotEmpty
 import java.sql.Timestamp
 
-class Order(
+data class Order(
     val id: Long? = null,
     val customer: Customer?,
     val isPayed: Boolean,
@@ -35,7 +35,7 @@ class Order(
             customer?.toEntity(),
             isPayed,
             status,
-            products.map { it.toEntity() },
+            products.map { it.toEntity() }.toMutableList(),
             createdAt,
             updatedAt
         )

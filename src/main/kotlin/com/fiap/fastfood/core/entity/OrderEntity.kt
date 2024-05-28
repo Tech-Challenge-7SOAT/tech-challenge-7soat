@@ -30,13 +30,13 @@ class OrderEntity(
 
     val status: Status,
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
         name = "tb_combos",
-        joinColumns = [JoinColumn(name = "order_id", referencedColumnName = "id")],
-        inverseJoinColumns = [JoinColumn(name = "product_id", referencedColumnName = "id")]
+        joinColumns = [JoinColumn(name = "order_id")],
+        inverseJoinColumns = [JoinColumn(name = "product_id")]
     )
-    var products: List<ProductEntity>,
+    var products: MutableList<ProductEntity> = mutableListOf(),
 
     @Column(name = "created_at")
     @CreationTimestamp
@@ -54,7 +54,7 @@ class OrderEntity(
         CustomerEntity(-1L, "", "", "", "", ""),
         false,
         Status.PENDENTE,
-        emptyList(),
+        mutableListOf(),
         null,
         null
     )

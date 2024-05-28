@@ -17,8 +17,11 @@ import kotlin.jvm.optionals.getOrElse
 
 @Service
 class OrderServiceImpl(
-    private val orderRepository: OrderRepository, private val customerRepository: CustomerRepository, private val productRepository: ProductRepository
+    private val orderRepository: OrderRepository,
+    private val customerRepository: CustomerRepository,
+    private val productRepository: ProductRepository
 ) : OrderService {
+
     override fun findOrderById(id: Long): Order {
         val orderEntity: Optional<OrderEntity> = orderRepository.findById(id)
 
@@ -26,24 +29,21 @@ class OrderServiceImpl(
     }
 
     override fun save(order: Order): Order {
-        try {
-            if (order.hasCombo()) {
-                val orderEntity = order.toEntity()
+        val customerEntity: CustomerEntity = customerRepository.save(order.customer!!.toEntity())
+        val products = productRepository.findAllByIdIn(order.products.map { it.id!! })
 
-                orderEntity.customer = if (order.customer != null) customerRepository.findById(order.customer.id)
-                    .getOrElse { throw OrderServiceException("Customer not found") }
-                else CustomerEntity(-1L, "", "", "", "", "")
+        val orderEntity = OrderEntity(
+            order.id,
+            order.totalAmount,
+            customerEntity,
+            order.isPayed,
+            order.status,
+            products.toMutableList(),
+            order.createdAt,
+            order.updatedAt
+        )
 
-                orderEntity.products = productRepository.findAllByIdIn(order.products.map { it.id!! })
-
-                return orderRepository.save(order.toEntity()).toDomain()
-            }
-
-            throw OrderServiceException("Order without combo")
-        } catch (e: Exception) {
-            e.printStackTrace()
-            throw OrderServiceException("Error saving order")
-        }
+        return orderRepository.save(orderEntity).toDomain()
     }
 
     override fun deleteOrderById(id: Long) {
