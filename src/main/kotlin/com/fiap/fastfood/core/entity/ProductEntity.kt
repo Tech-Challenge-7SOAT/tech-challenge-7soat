@@ -1,7 +1,6 @@
 package com.fiap.fastfood.core.entity
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.fiap.fastfood.core.domain.Product
 import com.fiap.fastfood.core.valueObject.ProductCategory
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
@@ -50,18 +49,4 @@ data class ProductEntity(
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
     @Column(name = "deleted_at")
     val deletedAt: Timestamp? = null
-) {
-    fun toDomain(): Product {
-        return Product(
-            id = id,
-            isActive = isActive,
-            name = name,
-            description = description,
-            price = price,
-            timeToPrepare = timeToPrepare,
-            category = category,
-            createdAt = createdAt,
-            updatedAt = updatedAt
-        )
-    }
-}
+)

@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.domain
+package com.fiap.fastfood.core.dto
 
 data class ExceptionResponse(
     var httpCode: Int,

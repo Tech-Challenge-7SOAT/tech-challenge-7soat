@@ -1,12 +1,11 @@
-package com.fiap.fastfood.core.domain
+package com.fiap.fastfood.core.dto
 
 import com.fiap.fastfood.core.entity.CustomerEntity
 import jakarta.validation.constraints.Email
-import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotEmpty
 import java.sql.Timestamp
 
-data class Customer(
+data class CustomerDTO(
     val id: Long,
     val firstName: String,
     val lastName: String,

@@ -1,7 +1,7 @@
 package com.fiap.fastfood.adapter.driver.controller
 
-import com.fiap.fastfood.core.application.service.CartService
-import com.fiap.fastfood.core.domain.Cart
+import com.fiap.fastfood.core.application.usecase.CartUseCase
+import com.fiap.fastfood.core.dto.CartDTO
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @Tag(name = "Checkout", description = "Finalize the shopping cart")
 @RestController
-class CheckoutController(private val cartService: CartService) {
+class CheckoutController(private val cartUseCase: CartUseCase) {
 
     @PostMapping("/checkout")
     @Operation(summary = "Perform shopping cart checkout")
@@ -21,5 +21,5 @@ class CheckoutController(private val cartService: CartService) {
         ApiResponse(responseCode = "200", description = "Checkout completed successfully"),
         ApiResponse(responseCode = "400", description = "Error when performing checkout")
     ])
-    fun index(@Validated @RequestBody cart: Cart) = this.cartService.checkout(cart)
+    fun index(@Validated @RequestBody cart: CartDTO) = this.cartUseCase.checkout(cart)
 }

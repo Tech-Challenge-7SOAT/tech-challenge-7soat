@@ -1,7 +1,7 @@
 package com.fiap.fastfood.adapter.driver.controller
 
-import com.fiap.fastfood.core.application.port.service.OrderService
-import com.fiap.fastfood.core.domain.Order
+import com.fiap.fastfood.core.application.usecase.OrderUseCase
+import com.fiap.fastfood.core.dto.OrderDTO
 import com.fiap.fastfood.core.valueObject.Status
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 @Tag(name = "Order", description = "Create, remove, edit and search orders by status")
 @RestController
 @RequestMapping("/orders")
-class OrderController(private val orderService: OrderService) {
+class OrderController(private val orderUseCase: OrderUseCase) {
     @GetMapping("/order/{id}")
     @Operation(summary = "Get order for the given id")
     @ApiResponses(
@@ -25,7 +25,7 @@ class OrderController(private val orderService: OrderService) {
         ]
     )
     fun getOrder(@PathVariable id: Long): ResponseEntity<Any> {
-        return ResponseEntity.ok(orderService.findOrderById(id))
+        return ResponseEntity.ok(orderUseCase.findOrderById(id))
     }
 
     @PostMapping("/order")
@@ -38,8 +38,8 @@ class OrderController(private val orderService: OrderService) {
             ApiResponse(responseCode = "500", description = "Internal server error")
         ]
     )
-    fun saveOrder(@RequestBody order: Order): ResponseEntity<Any> {
-        return ResponseEntity.ok(orderService.save(order))
+    fun saveOrder(@RequestBody order: OrderDTO): ResponseEntity<Any> {
+        return ResponseEntity.ok(orderUseCase.save(order))
     }
 
     @PutMapping("/order")
@@ -51,12 +51,12 @@ class OrderController(private val orderService: OrderService) {
             ApiResponse(responseCode = "500", description = "Internal server error")
         ]
     )
-    fun editOrder(@RequestBody order: Order): ResponseEntity<Any> {
+    fun editOrder(@RequestBody order: OrderDTO): ResponseEntity<Any> {
         if (order.id == null) {
             throw IllegalArgumentException()
         }
 
-        return ResponseEntity.ok(orderService.save(order))
+        return ResponseEntity.ok(orderUseCase.save(order))
     }
 
     @DeleteMapping("/order/{id}")
@@ -70,7 +70,7 @@ class OrderController(private val orderService: OrderService) {
         ]
     )
     fun deleteOrder(@PathVariable id: Long): ResponseEntity<Any> {
-        orderService.deleteOrderById(id)
+        orderUseCase.deleteOrderById(id)
 
         return ResponseEntity.noContent().build()
     }
@@ -85,6 +85,6 @@ class OrderController(private val orderService: OrderService) {
         ]
     )
     fun getOrders(@RequestParam status: Status?): ResponseEntity<Any> {
-        return ResponseEntity.ok(orderService.listOrders(status))
+        return ResponseEntity.ok(orderUseCase.listOrders(status))
     }
 }

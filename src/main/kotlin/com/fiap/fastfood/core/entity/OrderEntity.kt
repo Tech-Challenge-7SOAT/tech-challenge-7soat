@@ -1,8 +1,6 @@
 package com.fiap.fastfood.core.entity
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fiap.fastfood.core.domain.Order
 import com.fiap.fastfood.core.valueObject.Status
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
@@ -58,8 +56,4 @@ class OrderEntity(
         null,
         null
     )
-
-    fun toDomain(): Order {
-        return Order(id, customer?.toDomain(), isPayed, status, products.map { it.toDomain() }, createdAt, updatedAt)
-    }
 }

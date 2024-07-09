@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.domain
+package com.fiap.fastfood.core.dto
 
 import com.fiap.fastfood.core.entity.ProductEntity
 import com.fiap.fastfood.core.valueObject.ProductCategory
@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import java.sql.Timestamp
 
-class Product(
+class ProductDTO(
     val id: Long? = null,
     var isActive: Boolean = true,
     @field:NotBlank

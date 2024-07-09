@@ -1,7 +1,7 @@
 package com.fiap.fastfood.adapter.driver.controller
 
-import com.fiap.fastfood.core.application.port.service.ProductService
-import com.fiap.fastfood.core.domain.Product
+import com.fiap.fastfood.core.application.usecase.ProductUseCase
+import com.fiap.fastfood.core.dto.ProductDTO
 import com.fiap.fastfood.core.valueObject.ProductCategory
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/products")
 class ProductController(
-    val productService: ProductService
+    val productUseCase: ProductUseCase
 ) {
 
     @PostMapping("/product")
@@ -28,9 +28,9 @@ class ProductController(
         ApiResponse(responseCode = "500", description = "When it is not possible to create the product")
     ])
     fun createProduct(
-        @Valid @RequestBody productBody: Product
+        @Valid @RequestBody productBody: ProductDTO
     ): ResponseEntity<Any> {
-        productService.create(productBody)
+        productUseCase.create(productBody)
 
         return ResponseEntity("Product created successfully", HttpStatus.CREATED)
     }
@@ -45,9 +45,9 @@ class ProductController(
     ])
     fun findProductsByCategory(
         @RequestParam(required = true) category: ProductCategory
-    ): List<Product> {
+    ): List<ProductDTO> {
 
-        return productService.findByCategory(category)
+        return productUseCase.findByCategory(category)
     }
 
     @PatchMapping("/product/{id}")
@@ -59,9 +59,9 @@ class ProductController(
     ])
     fun updateProduct(
         @PathVariable(required = true) id: Long,
-        @Valid @RequestBody productBody: Product
+        @Valid @RequestBody productBody: ProductDTO
     ): ResponseEntity<Any> {
-        productService.update(id, productBody)
+        productUseCase.update(id, productBody)
 
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }
@@ -76,7 +76,7 @@ class ProductController(
     fun removeProduct(
         @PathVariable(required = true) id: Long
     ): ResponseEntity<Any> {
-        productService.delete(id)
+        productUseCase.delete(id)
 
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }

@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.application.port.repository
+package com.fiap.fastfood.core.application.port.gateway
 
 import com.fiap.fastfood.core.entity.CustomerEntity
 import org.springframework.data.jpa.repository.JpaRepository

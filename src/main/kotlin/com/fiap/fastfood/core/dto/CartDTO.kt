@@ -1,13 +1,13 @@
-package com.fiap.fastfood.core.domain
+package com.fiap.fastfood.core.dto
 
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotEmpty
 
 
-data class Cart(
+data class CartDTO(
     @field:NotBlank
     val id: String,
 
     @field:NotEmpty
-    val items: List<CartItem>
+    val items: List<CartItemDTO>
 )

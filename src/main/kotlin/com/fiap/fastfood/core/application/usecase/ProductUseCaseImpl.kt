@@ -1,8 +1,8 @@
-package com.fiap.fastfood.core.application.service
+package com.fiap.fastfood.core.application.usecase
 
-import com.fiap.fastfood.core.application.port.repository.ProductRepository
-import com.fiap.fastfood.core.application.port.service.ProductService
-import com.fiap.fastfood.core.domain.Product
+import com.fiap.fastfood.core.application.port.gateway.ProductRepository
+import com.fiap.fastfood.core.application.port.presenter.ProductPresenter
+import com.fiap.fastfood.core.dto.ProductDTO
 import com.fiap.fastfood.core.entity.ProductEntity
 import com.fiap.fastfood.core.valueObject.ProductCategory
 import com.fiap.produto.exception.ProductNotFoundByCategoryException
@@ -12,19 +12,20 @@ import org.springframework.stereotype.Service
 import java.sql.Timestamp
 
 @Service
-class ProductServiceImpl(
-    private val productRepository: ProductRepository
-) : ProductService {
+class ProductUseCaseImpl(
+    private val productRepository: ProductRepository,
+    private val productPresenter: ProductPresenter
+) : ProductUseCase {
 
-    override fun create(product: Product) {
+    override fun create(product: ProductDTO) {
         val productEntity = product.toEntity()
-        productRepository.save(productEntity).toDomain()
+        productRepository.save(productEntity)
     }
 
-    override fun findByCategory(category: ProductCategory): List<Product> {
+    override fun findByCategory(category: ProductCategory): List<ProductDTO> {
         return productRepository.findByCategory(category)
             .filter { it.isActive }
-            .map { it.toDomain() }
+            .map { productPresenter.toDTO(it) }
             .takeIf { it.isNotEmpty() }
             ?: throw ProductNotFoundByCategoryException(
                 "No products found for category <$category>",
@@ -32,7 +33,7 @@ class ProductServiceImpl(
             )
     }
 
-    override fun update(id: Long, product: Product) {
+    override fun update(id: Long, product: ProductDTO) {
         val existingProduct = productRepository.findById(id)
             .orElseThrow { ProductNotFoundException("Product <$id> not found", HttpStatus.NOT_FOUND.value()) }
 

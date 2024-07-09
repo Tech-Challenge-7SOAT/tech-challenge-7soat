@@ -1,6 +1,6 @@
 package com.fiap.fastfood.adapter.driver.controller.advice
 
-import com.fiap.fastfood.core.domain.ExceptionResponse
+import com.fiap.fastfood.core.dto.ExceptionResponse
 import com.fiap.fastfood.core.exception.InvalidIdTypeException
 import com.fiap.fastfood.core.exception.OrderNotFoundException
 import com.fiap.produto.exception.InternalServerErrorException

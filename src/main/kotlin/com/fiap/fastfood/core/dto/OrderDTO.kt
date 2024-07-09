@@ -1,16 +1,16 @@
-package com.fiap.fastfood.core.domain
+package com.fiap.fastfood.core.dto
 
 import com.fiap.fastfood.core.entity.OrderEntity
 import com.fiap.fastfood.core.valueObject.Status
 import jakarta.validation.constraints.NotEmpty
 import java.sql.Timestamp
 
-data class Order(
+data class OrderDTO(
     val id: Long? = null,
-    val customer: Customer?,
+    val customer: CustomerDTO?,
     val isPayed: Boolean,
     val status: Status,
-    @field:NotEmpty val products: List<Product>,
+    @field:NotEmpty val products: List<ProductDTO>,
     val createdAt: Timestamp? = null,
     val updatedAt: Timestamp? = null
 ) {

@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.application.port.repository
+package com.fiap.fastfood.core.application.port.gateway
 
 import com.fiap.fastfood.core.entity.OrderEntity
 import com.fiap.fastfood.core.valueObject.Status
