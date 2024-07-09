@@ -1,5 +1,6 @@
 package com.fiap.fastfood.adapter.driver.controller
 
+import com.fiap.fastfood.core.application.port.presenter.ProductPresenter
 import com.fiap.fastfood.core.application.usecase.ProductUseCase
 import com.fiap.fastfood.core.dto.ProductDTO
 import com.fiap.fastfood.core.valueObject.ProductCategory
@@ -16,7 +17,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/products")
 class ProductController(
-    val productUseCase: ProductUseCase
+    private val productUseCase: ProductUseCase,
+    private val presenter: ProductPresenter
 ) {
 
     @PostMapping("/product")
@@ -46,8 +48,9 @@ class ProductController(
     fun findProductsByCategory(
         @RequestParam(required = true) category: ProductCategory
     ): List<ProductDTO> {
+        val products = productUseCase.findByCategory(category)
 
-        return productUseCase.findByCategory(category)
+        return products.map { product -> presenter.toDTO(product) }
     }
 
     @PatchMapping("/product/{id}")

@@ -1,5 +1,6 @@
 package com.fiap.fastfood.adapter.driver.controller
 
+import com.fiap.fastfood.core.application.port.presenter.OrderPresenter
 import com.fiap.fastfood.core.application.usecase.OrderUseCase
 import com.fiap.fastfood.core.dto.OrderDTO
 import com.fiap.fastfood.core.valueObject.Status
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.*
 @Tag(name = "Order", description = "Create, remove, edit and search orders by status")
 @RestController
 @RequestMapping("/orders")
-class OrderController(private val orderUseCase: OrderUseCase) {
+class OrderController(
+    private val orderUseCase: OrderUseCase,
+    private val presenter: OrderPresenter
+) {
     @GetMapping("/order/{id}")
     @Operation(summary = "Get order for the given id")
     @ApiResponses(
@@ -25,7 +29,7 @@ class OrderController(private val orderUseCase: OrderUseCase) {
         ]
     )
     fun getOrder(@PathVariable id: Long): ResponseEntity<Any> {
-        return ResponseEntity.ok(orderUseCase.findOrderById(id))
+        return ResponseEntity.ok(presenter.toDTO(orderUseCase.findOrderById(id)))
     }
 
     @PostMapping("/order")
@@ -39,7 +43,7 @@ class OrderController(private val orderUseCase: OrderUseCase) {
         ]
     )
     fun saveOrder(@RequestBody order: OrderDTO): ResponseEntity<Any> {
-        return ResponseEntity.ok(orderUseCase.save(order))
+        return ResponseEntity.ok(presenter.toDTO(orderUseCase.save(order)))
     }
 
     @PutMapping("/order")
@@ -56,7 +60,7 @@ class OrderController(private val orderUseCase: OrderUseCase) {
             throw IllegalArgumentException()
         }
 
-        return ResponseEntity.ok(orderUseCase.save(order))
+        return ResponseEntity.ok(presenter.toDTO(orderUseCase.save(order)))
     }
 
     @DeleteMapping("/order/{id}")
@@ -70,7 +74,7 @@ class OrderController(private val orderUseCase: OrderUseCase) {
         ]
     )
     fun deleteOrder(@PathVariable id: Long): ResponseEntity<Any> {
-        orderUseCase.deleteOrderById(id)
+        orderUseCase.deleteOrderById(id) //TODO presenter?
 
         return ResponseEntity.noContent().build()
     }
@@ -85,6 +89,7 @@ class OrderController(private val orderUseCase: OrderUseCase) {
         ]
     )
     fun getOrders(@RequestParam status: Status?): ResponseEntity<Any> {
-        return ResponseEntity.ok(orderUseCase.listOrders(status))
+        val orders = orderUseCase.listOrders(status)
+        return ResponseEntity.ok(orders.map { order -> presenter.toDTO(order) })
     }
 }

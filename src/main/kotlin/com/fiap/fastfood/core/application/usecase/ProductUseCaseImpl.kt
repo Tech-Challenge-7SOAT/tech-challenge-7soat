@@ -1,7 +1,6 @@
 package com.fiap.fastfood.core.application.usecase
 
 import com.fiap.fastfood.core.application.port.gateway.ProductRepository
-import com.fiap.fastfood.core.application.port.presenter.ProductPresenter
 import com.fiap.fastfood.core.dto.ProductDTO
 import com.fiap.fastfood.core.entity.ProductEntity
 import com.fiap.fastfood.core.valueObject.ProductCategory
@@ -13,8 +12,7 @@ import java.sql.Timestamp
 
 @Service
 class ProductUseCaseImpl(
-    private val productRepository: ProductRepository,
-    private val productPresenter: ProductPresenter
+    private val productRepository: ProductRepository
 ) : ProductUseCase {
 
     override fun create(product: ProductDTO) {
@@ -22,10 +20,9 @@ class ProductUseCaseImpl(
         productRepository.save(productEntity)
     }
 
-    override fun findByCategory(category: ProductCategory): List<ProductDTO> {
+    override fun findByCategory(category: ProductCategory): List<ProductEntity> {
         return productRepository.findByCategory(category)
             .filter { it.isActive }
-            .map { productPresenter.toDTO(it) }
             .takeIf { it.isNotEmpty() }
             ?: throw ProductNotFoundByCategoryException(
                 "No products found for category <$category>",
