@@ -1,6 +1,6 @@
 package com.fiap.fastfood.adapter.driver.controller
 
-import com.fiap.fastfood.core.application.usecase.CustomerUseCase
+import com.fiap.fastfood.core.application.useCase.CustomerUseCase
 import com.fiap.fastfood.core.application.port.gateway.CustomerRepository
 import com.fiap.fastfood.core.application.port.presenter.CustomerPresenter
 import com.fiap.fastfood.core.dto.CustomerDTO

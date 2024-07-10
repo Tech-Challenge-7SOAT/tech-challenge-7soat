@@ -1,7 +1,7 @@
 package com.fiap.fastfood.adapter.driver.controller
 
 import com.fiap.fastfood.core.application.port.presenter.OrderPresenter
-import com.fiap.fastfood.core.application.usecase.OrderUseCase
+import com.fiap.fastfood.core.application.useCase.OrderUseCase
 import com.fiap.fastfood.core.dto.OrderDTO
 import com.fiap.fastfood.core.valueObject.Status
 import io.swagger.v3.oas.annotations.Operation
@@ -46,7 +46,7 @@ class OrderController(
         return ResponseEntity.ok(presenter.toDTO(orderUseCase.save(order)))
     }
 
-    @PutMapping("/order")
+    @PutMapping("/order") //TODO mudar pra patch pra atender o item 5 do tech challenge?
     @Operation(summary = "Edit an order")
     @ApiResponses(
         value = [
@@ -74,12 +74,12 @@ class OrderController(
         ]
     )
     fun deleteOrder(@PathVariable id: Long): ResponseEntity<Any> {
-        orderUseCase.deleteOrderById(id) //TODO presenter?
+        orderUseCase.deleteOrderById(id)
 
         return ResponseEntity.noContent().build()
     }
 
-    @GetMapping("/")
+    @GetMapping
     @Operation(summary = "Get all orders")
     @ApiResponses(
         value = [
@@ -88,7 +88,9 @@ class OrderController(
             ApiResponse(responseCode = "500", description = "Internal server error")
         ]
     )
-    fun getOrders(@RequestParam status: Status?): ResponseEntity<Any> {
+    fun getOrders(
+        @RequestParam(required = false) status: Status?
+    ): ResponseEntity<Any> {
         val orders = orderUseCase.listOrders(status)
         return ResponseEntity.ok(orders.map { order -> presenter.toDTO(order) })
     }

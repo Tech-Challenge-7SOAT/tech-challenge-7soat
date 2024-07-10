@@ -2,18 +2,20 @@ package com.fiap.fastfood.core.application.port.presenter
 
 import com.fiap.fastfood.core.dto.CustomerDTO
 import com.fiap.fastfood.core.entity.CustomerEntity
+import org.springframework.stereotype.Component
 
-class CustomerPresenter(private val customer: CustomerDTO) {
+@Component
+class CustomerPresenter {
 
     fun toDTO(customerEntity: CustomerEntity): CustomerDTO {
         return CustomerDTO(
-            id = customer.id,
-            firstName = customer.firstName,
-            lastName = customer.lastName,
-            cpf = customer.cpf,
-            email = customer.email,
-            phoneNumber = customer.phoneNumber,
-            createdAt = customer.createdAt
+            id = customerEntity.id,
+            firstName = customerEntity.firstName,
+            lastName = customerEntity.lastName,
+            cpf = customerEntity.cpf,
+            email = customerEntity.email,
+            phoneNumber = customerEntity.phoneNumber,
+            createdAt = customerEntity.createdAt
         )
     }
 }

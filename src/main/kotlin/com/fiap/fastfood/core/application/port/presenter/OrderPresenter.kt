@@ -2,14 +2,15 @@ package com.fiap.fastfood.core.application.port.presenter
 
 import com.fiap.fastfood.core.dto.OrderDTO
 import com.fiap.fastfood.core.entity.OrderEntity
+import org.springframework.stereotype.Component
 
+@Component
 class OrderPresenter(
-    private val orderEntity: OrderEntity,
     private val productPresenter: ProductPresenter,
-    private val customerPresenter: CustomerPresenter) {
+    private val customerPresenter: CustomerPresenter
+) {
 
-
-    fun toDTO(save: OrderEntity): OrderDTO {
+    fun toDTO(orderEntity: OrderEntity): OrderDTO {
         return OrderDTO(
             orderEntity.id,
             orderEntity.customer?.let { customerPresenter.toDTO(it) },
@@ -19,5 +20,4 @@ class OrderPresenter(
             orderEntity.createdAt,
             orderEntity.updatedAt)
     }
-
 }
