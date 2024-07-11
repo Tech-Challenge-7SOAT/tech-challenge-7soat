@@ -1,6 +1,7 @@
 package com.fiap.fastfood.core.application.port.service
 
 import com.fiap.fastfood.core.domain.Order
+import com.fiap.fastfood.core.entity.OrderStatusEntity
 import com.fiap.fastfood.core.valueObject.Status
 
 interface OrderService {
@@ -8,4 +9,5 @@ interface OrderService {
     fun save(order: Order): Order
     fun deleteOrderById(id: Long)
     fun listOrders(status: Status?): List<Order>
+    fun findOrderStatusById(id: Long): OrderStatusEntity?
 }
