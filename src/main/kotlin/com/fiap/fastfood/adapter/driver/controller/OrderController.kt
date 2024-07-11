@@ -2,6 +2,7 @@ package com.fiap.fastfood.adapter.driver.controller
 
 import com.fiap.fastfood.core.application.port.service.OrderService
 import com.fiap.fastfood.core.domain.Order
+import com.fiap.fastfood.core.entity.OrderStatusEntity
 import com.fiap.fastfood.core.valueObject.Status
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/orders")
 class OrderController(private val orderService: OrderService) {
+
     @GetMapping("/order/{id}")
     @Operation(summary = "Get order for the given id")
     @ApiResponses(
@@ -86,5 +88,18 @@ class OrderController(private val orderService: OrderService) {
     )
     fun getOrders(@RequestParam status: Status?): ResponseEntity<Any> {
         return ResponseEntity.ok(orderService.listOrders(status))
+    }
+
+    @GetMapping("/order/{id}/status")
+    @Operation(summary = "Get order status for the given id")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Order status found"),
+            ApiResponse(responseCode = "404", description = "Order not found"),
+            ApiResponse(responseCode = "500", description = "Internal server error")
+        ]
+    )
+    fun getOrderStatus(@PathVariable id: Long): ResponseEntity<OrderStatusEntity> {
+        return ResponseEntity.ok(orderService.findOrderStatusById(id))
     }
 }

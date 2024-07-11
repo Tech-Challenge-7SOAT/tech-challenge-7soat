@@ -8,12 +8,14 @@ import com.fiap.fastfood.core.domain.Customer
 import com.fiap.fastfood.core.domain.Order
 import com.fiap.fastfood.core.entity.CustomerEntity
 import com.fiap.fastfood.core.entity.OrderEntity
+import com.fiap.fastfood.core.entity.OrderStatusEntity
 import com.fiap.fastfood.core.exception.OrderNotFoundException
 import com.fiap.fastfood.core.exception.OrderServiceException
 import com.fiap.fastfood.core.valueObject.Status
 import org.springframework.stereotype.Service
 import java.util.*
 import kotlin.jvm.optionals.getOrElse
+import kotlin.jvm.optionals.getOrNull
 
 @Service
 class OrderServiceImpl(
@@ -69,4 +71,9 @@ class OrderServiceImpl(
 
         return orders
     }
+
+    override fun findOrderStatusById(id: Long): OrderStatusEntity? =
+        orderRepository.findById(id)
+            .getOrElse { throw OrderNotFoundException() }
+            ?.let { OrderStatusEntity(it.id!!, it.status) }
 }
