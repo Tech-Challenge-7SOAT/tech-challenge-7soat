@@ -1,7 +1,7 @@
 package com.fiap.fastfood.adapter.driver.controller
 
 import com.fiap.fastfood.core.application.port.presenter.ProductPresenter
-import com.fiap.fastfood.core.application.useCase.ProductUseCase
+import com.fiap.fastfood.core.application.useCase.product.ProductUseCase
 import com.fiap.fastfood.core.dto.ProductDTO
 import com.fiap.fastfood.core.valueObject.ProductCategory
 import io.swagger.v3.oas.annotations.Operation

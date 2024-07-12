@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.application.useCase
+package com.fiap.fastfood.core.application.useCase.product
 
 import com.fiap.fastfood.core.application.port.gateway.ProductRepository
 import com.fiap.fastfood.core.dto.ProductDTO

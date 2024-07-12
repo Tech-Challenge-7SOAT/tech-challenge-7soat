@@ -1,7 +1,7 @@
 package com.fiap.fastfood.adapter.driver.controller
 
 import com.fiap.fastfood.core.application.port.presenter.OrderPresenter
-import com.fiap.fastfood.core.application.useCase.OrderUseCase
+import com.fiap.fastfood.core.application.useCase.order.OrderUseCase
 import com.fiap.fastfood.core.dto.OrderDTO
 import com.fiap.fastfood.core.valueObject.Status
 import io.swagger.v3.oas.annotations.Operation
@@ -46,7 +46,7 @@ class OrderController(
         return ResponseEntity.ok(presenter.toDTO(orderUseCase.save(order)))
     }
 
-    @PutMapping("/order") //TODO mudar pra patch pra atender o item 5 do tech challenge?
+    @PatchMapping("/order")
     @Operation(summary = "Edit an order")
     @ApiResponses(
         value = [

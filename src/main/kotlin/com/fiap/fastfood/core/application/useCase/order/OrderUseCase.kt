@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.application.useCase
+package com.fiap.fastfood.core.application.useCase.order
 
 import com.fiap.fastfood.core.dto.OrderDTO
 import com.fiap.fastfood.core.entity.OrderEntity

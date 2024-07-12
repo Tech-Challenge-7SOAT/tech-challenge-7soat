@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.application.useCase
+package com.fiap.fastfood.core.application.useCase.cart
 
 import com.fiap.fastfood.core.dto.CartDTO
 import org.springframework.stereotype.Service

@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.application.useCase
+package com.fiap.fastfood.core.application.useCase.order
 
 import com.fiap.fastfood.core.application.port.gateway.CustomerRepository
 import com.fiap.fastfood.core.application.port.gateway.OrderRepository
@@ -71,7 +71,7 @@ class OrderUseCaseImpl(
     private fun sortOrders(orders: List<OrderEntity>): List<OrderEntity> {
         try {
         val filteredOrders = orders.filterNot { it.status == Status.FINALIZADO }
-        val sortedOrders = filteredOrders.sortedWith(compareBy({ it.status.order }, { it.createdAt }))
+        val sortedOrders = filteredOrders.sortedWith(compareBy({ it.status.ordinal }, { it.createdAt }))
 
             return sortedOrders
         } catch (e: Exception) {

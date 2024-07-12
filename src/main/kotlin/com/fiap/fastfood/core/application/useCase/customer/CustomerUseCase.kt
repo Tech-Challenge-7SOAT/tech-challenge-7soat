@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.application.useCase
+package com.fiap.fastfood.core.application.useCase.customer
 
 import com.fiap.fastfood.core.dto.CustomerDTO
 import com.fiap.fastfood.core.entity.CustomerEntity
