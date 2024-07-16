@@ -2,7 +2,7 @@ package com.fiap.fastfood.adapter.driver.controller
 
 import com.fiap.fastfood.core.application.port.presenter.ProductPresenter
 import com.fiap.fastfood.core.application.useCase.product.ProductUseCase
-import com.fiap.fastfood.core.dto.ProductDTO
+import com.fiap.fastfood.core.dto.product.ProductDTO
 import com.fiap.fastfood.core.valueObject.ProductCategory
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -37,7 +37,7 @@ class ProductController(
         return ResponseEntity("Product created successfully", HttpStatus.CREATED)
     }
 
-    @GetMapping
+    @GetMapping("/category")
     @Operation(summary = "Find products by category")
     @ApiResponses(value = [
         ApiResponse(responseCode = "200", description = "Returns a list of products based on the specified category"),
@@ -46,9 +46,23 @@ class ProductController(
         ApiResponse(responseCode = "500", description = "When it is not possible to find the product")
     ])
     fun findProductsByCategory(
-        @RequestParam(required = true) category: ProductCategory
+        @RequestParam category: ProductCategory
     ): List<ProductDTO> {
         val products = productUseCase.findByCategory(category)
+
+        return products.map { product -> presenter.toDTO(product) }
+    }
+
+    @GetMapping
+    @Operation(summary = "Find all products")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200", description = "Returns a list of products"),
+        ApiResponse(responseCode = "404", description = "When can't find a products")
+    ])
+    fun findAllProducts(
+        @RequestParam(required = false) isActive: Boolean
+    ): List<ProductDTO> {
+        val products = productUseCase.findAllProducts(isActive)
 
         return products.map { product -> presenter.toDTO(product) }
     }

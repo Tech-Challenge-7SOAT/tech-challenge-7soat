@@ -1,6 +1,6 @@
 package com.fiap.fastfood.core.application.port.presenter
 
-import com.fiap.fastfood.core.dto.ProductDTO
+import com.fiap.fastfood.core.dto.product.ProductDTO
 import com.fiap.fastfood.core.entity.ProductEntity
 import org.springframework.stereotype.Component
 

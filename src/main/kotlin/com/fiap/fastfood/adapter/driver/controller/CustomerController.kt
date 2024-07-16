@@ -3,7 +3,7 @@ package com.fiap.fastfood.adapter.driver.controller
 import com.fiap.fastfood.core.application.useCase.customer.CustomerUseCase
 import com.fiap.fastfood.core.application.port.gateway.CustomerRepository
 import com.fiap.fastfood.core.application.port.presenter.CustomerPresenter
-import com.fiap.fastfood.core.dto.CustomerDTO
+import com.fiap.fastfood.core.dto.customer.CustomerDTO
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses

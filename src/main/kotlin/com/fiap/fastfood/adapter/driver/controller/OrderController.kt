@@ -2,12 +2,16 @@ package com.fiap.fastfood.adapter.driver.controller
 
 import com.fiap.fastfood.core.application.port.presenter.OrderPresenter
 import com.fiap.fastfood.core.application.useCase.order.OrderUseCase
-import com.fiap.fastfood.core.dto.OrderDTO
+import com.fiap.fastfood.core.dto.order.OrderDTO
+import com.fiap.fastfood.core.dto.order.OrderRequestCreateDTO
+import com.fiap.fastfood.core.dto.order.OrderRequestUpdateDTO
 import com.fiap.fastfood.core.valueObject.Status
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.validation.Valid
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -28,7 +32,7 @@ class OrderController(
             ApiResponse(responseCode = "500", description = "Internal server error")
         ]
     )
-    fun getOrder(@PathVariable id: Long): ResponseEntity<Any> {
+    fun getOrder(@PathVariable(required = true) id: Long): ResponseEntity<OrderDTO> {
         return ResponseEntity.ok(presenter.toDTO(orderUseCase.findOrderById(id)))
     }
 
@@ -36,14 +40,16 @@ class OrderController(
     @Operation(summary = "Create a new order")
     @ApiResponses(
         value = [
-            ApiResponse(responseCode = "200", description = "Order updated"),
             ApiResponse(responseCode = "201", description = "Order created"),
-            ApiResponse(responseCode = "400", description = "Bad Request"),
-            ApiResponse(responseCode = "500", description = "Internal server error")
+            ApiResponse(responseCode = "400", description = "CPF is required"),
+            ApiResponse(responseCode = "404", description = "Customer with this CPF does not exist."),
+            ApiResponse(responseCode = "404", description = "Product not found for IDs: xpto")
         ]
     )
-    fun saveOrder(@RequestBody order: OrderDTO): ResponseEntity<Any> {
-        return ResponseEntity.ok(presenter.toDTO(orderUseCase.save(order)))
+    fun saveOrder(
+        @RequestBody order: OrderRequestCreateDTO
+    ): ResponseEntity<OrderDTO> {
+        return ResponseEntity.status(HttpStatus.CREATED).body(presenter.toDTO(orderUseCase.create(order)))
     }
 
     @PatchMapping("/order")
@@ -51,16 +57,16 @@ class OrderController(
     @ApiResponses(
         value = [
             ApiResponse(responseCode = "200", description = "Order updated"),
-            ApiResponse(responseCode = "400", description = "Bad Request"),
-            ApiResponse(responseCode = "500", description = "Internal server error")
+            ApiResponse(responseCode = "400", description = "Order already finalized when status is equals to FINALIZADO"),
+            ApiResponse(responseCode = "404", description = "Order not found"),
+            ApiResponse(responseCode = "404", description = "Customer with this CPF does not exist."),
+            ApiResponse(responseCode = "404", description = "Product not found for IDs: xpto")
         ]
     )
-    fun editOrder(@RequestBody order: OrderDTO): ResponseEntity<Any> {
-        if (order.id == null) {
-            throw IllegalArgumentException()
-        }
-
-        return ResponseEntity.ok(presenter.toDTO(orderUseCase.save(order)))
+    fun editOrder(
+        @Valid @RequestBody order: OrderRequestUpdateDTO
+    ): ResponseEntity<OrderDTO> {
+        return ResponseEntity.ok(presenter.toDTO(orderUseCase.update(order)))
     }
 
     @DeleteMapping("/order/{id}")
@@ -75,7 +81,6 @@ class OrderController(
     )
     fun deleteOrder(@PathVariable id: Long): ResponseEntity<Any> {
         orderUseCase.deleteOrderById(id)
-
         return ResponseEntity.noContent().build()
     }
 
@@ -90,7 +95,7 @@ class OrderController(
     )
     fun getOrders(
         @RequestParam(required = false) status: Status?
-    ): ResponseEntity<Any> {
+    ): ResponseEntity<List<OrderDTO>> {
         val orders = orderUseCase.listOrders(status)
         return ResponseEntity.ok(orders.map { order -> presenter.toDTO(order) })
     }

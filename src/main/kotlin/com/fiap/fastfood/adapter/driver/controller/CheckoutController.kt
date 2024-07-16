@@ -1,7 +1,7 @@
 package com.fiap.fastfood.adapter.driver.controller
 
 import com.fiap.fastfood.core.application.useCase.cart.CartUseCase
-import com.fiap.fastfood.core.dto.CartDTO
+import com.fiap.fastfood.core.dto.cart.CartDTO
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses

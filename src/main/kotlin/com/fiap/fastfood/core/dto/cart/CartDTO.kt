@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.dto
+package com.fiap.fastfood.core.dto.cart
 
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotEmpty

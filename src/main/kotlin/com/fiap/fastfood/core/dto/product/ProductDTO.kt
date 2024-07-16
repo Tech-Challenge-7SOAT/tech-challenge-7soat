@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.dto
+package com.fiap.fastfood.core.dto.product
 
 import com.fiap.fastfood.core.entity.ProductEntity
 import com.fiap.fastfood.core.valueObject.ProductCategory

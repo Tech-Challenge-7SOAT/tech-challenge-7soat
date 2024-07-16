@@ -1,4 +1,4 @@
-package com.fiap.fastfood.core.dto
+package com.fiap.fastfood.core.dto.customer
 
 import com.fiap.fastfood.core.entity.CustomerEntity
 import jakarta.validation.constraints.Email

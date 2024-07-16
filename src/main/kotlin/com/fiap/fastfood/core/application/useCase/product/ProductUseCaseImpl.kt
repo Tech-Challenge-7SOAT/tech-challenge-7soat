@@ -1,7 +1,7 @@
 package com.fiap.fastfood.core.application.useCase.product
 
 import com.fiap.fastfood.core.application.port.gateway.ProductRepository
-import com.fiap.fastfood.core.dto.ProductDTO
+import com.fiap.fastfood.core.dto.product.ProductDTO
 import com.fiap.fastfood.core.entity.ProductEntity
 import com.fiap.fastfood.core.valueObject.ProductCategory
 import com.fiap.produto.exception.ProductNotFoundByCategoryException
@@ -28,6 +28,12 @@ class ProductUseCaseImpl(
                 "No products found for category <$category>",
                 HttpStatus.NOT_FOUND.value()
             )
+    }
+
+    override fun findAllProducts(isActive: Boolean): List<ProductEntity> {
+        val allProducts = productRepository.findAll()
+        val filteredProducts = if (isActive) allProducts.filter { it.isActive } else allProducts
+        return validateListProducts(filteredProducts)
     }
 
     override fun update(id: Long, product: ProductDTO) {
@@ -57,5 +63,10 @@ class ProductUseCaseImpl(
     fun findProductById(id: Long): ProductEntity {
         return productRepository.findById(id)
             .orElseThrow { throw ProductNotFoundException("Product <$id> not found", HttpStatus.NOT_FOUND.value()) }
+    }
+
+    private fun validateListProducts(products: List<ProductEntity>): List<ProductEntity> {
+        return products.takeIf { it.isNotEmpty() }
+            ?: throw ProductNotFoundException("No products found", HttpStatus.NOT_FOUND.value())
     }
 }

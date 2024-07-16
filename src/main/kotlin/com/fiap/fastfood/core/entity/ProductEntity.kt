@@ -26,9 +26,6 @@ data class ProductEntity(
     @Column(name = "price", nullable = false)
     var price: Double = 0.0,
 
-    @ManyToMany(mappedBy = "products", cascade = [CascadeType.REMOVE])
-    val order: MutableList<OrderEntity> = mutableListOf(),
-
     @Column(name = "time_to_prepare", nullable = false)
     var timeToPrepare: Int = 0,
 

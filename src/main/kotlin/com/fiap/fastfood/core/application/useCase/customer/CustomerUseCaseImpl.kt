@@ -1,7 +1,7 @@
 package com.fiap.fastfood.core.application.useCase.customer
 
 import com.fiap.fastfood.core.application.port.gateway.CustomerRepository
-import com.fiap.fastfood.core.dto.CustomerDTO
+import com.fiap.fastfood.core.dto.customer.CustomerDTO
 import com.fiap.fastfood.core.entity.CustomerEntity
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Service
