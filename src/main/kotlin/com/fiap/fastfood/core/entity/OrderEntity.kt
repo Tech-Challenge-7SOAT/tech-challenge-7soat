@@ -61,4 +61,6 @@ class OrderEntity(
         null,
         null
     )
+
+    fun hasFinished(): Boolean = status == Status.FINALIZADO
 }
