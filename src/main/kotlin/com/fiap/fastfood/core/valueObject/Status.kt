@@ -5,5 +5,6 @@ enum class Status {
     EM_PREPARACAO,
     RECEBIDO,
     FINALIZADO,
-    PENDENTE
+    PENDENTE,
+    PAGAMENTO_RECUSADO
 }
