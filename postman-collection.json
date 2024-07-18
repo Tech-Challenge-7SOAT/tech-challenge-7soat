@@ -1,0 +1,3088 @@
+{
+	"info": {
+		"_postman_id": "e6e4d89e-24b9-4b7f-809a-681d407dd080",
+		"name": "OpenAPI definition",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22367979"
+	},
+	"item": [
+		{
+			"name": "webhook",
+			"item": [
+				{
+					"name": "payment",
+					"item": [
+						{
+							"name": "Receive payment webhook",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"orderId\": \"<long>\",\n  \"status\": \"RECEBIDO\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/webhook/payment",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"webhook",
+										"payment"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Payment webhook received",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"orderId\": \"<long>\",\n  \"status\": \"RECEBIDO\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/webhook/payment",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"webhook",
+												"payment"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "<boolean>"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"orderId\": \"<long>\",\n  \"status\": \"RECEBIDO\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/webhook/payment",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"webhook",
+												"payment"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"name": "Order not found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"orderId\": \"<long>\",\n  \"status\": \"RECEBIDO\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/webhook/payment",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"webhook",
+												"payment"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "<boolean>"
+								},
+								{
+									"name": "Internal server error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"orderId\": \"<long>\",\n  \"status\": \"RECEBIDO\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/webhook/payment",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"webhook",
+												"payment"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "<boolean>"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "product",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Delete a product",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/products/product/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"products",
+												"product",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Product deleted successfully",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/products/product/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"products",
+														"product",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/products/product/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"products",
+														"product",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"name": "When can't find a product using the ID provided",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/products/product/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"products",
+														"product",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										},
+										{
+											"name": "When it is not possible to delete the product",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/products/product/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"products",
+														"product",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "Edit a product",
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"category\": \"BEBIDA\",\n  \"description\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"price\": \"<double>\",\n  \"timeToPrepare\": \"<integer>\",\n  \"id\": \"<long>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"active\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/products/product/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"products",
+												"product",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Product edited successfully",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"category\": \"BEBIDA\",\n  \"description\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"price\": \"<double>\",\n  \"timeToPrepare\": \"<integer>\",\n  \"id\": \"<long>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"active\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/products/product/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"products",
+														"product",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"category\": \"BEBIDA\",\n  \"description\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"price\": \"<double>\",\n  \"timeToPrepare\": \"<integer>\",\n  \"id\": \"<long>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"active\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/products/product/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"products",
+														"product",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"name": "When can't find a product using the ID provided",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"category\": \"BEBIDA\",\n  \"description\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"price\": \"<double>\",\n  \"timeToPrepare\": \"<integer>\",\n  \"id\": \"<long>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"active\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/products/product/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"products",
+														"product",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										},
+										{
+											"name": "When it is not possible to update the product",
+											"originalRequest": {
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"category\": \"BEBIDA\",\n  \"description\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"price\": \"<double>\",\n  \"timeToPrepare\": \"<integer>\",\n  \"id\": \"<long>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"active\": \"<boolean>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/products/product/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"products",
+														"product",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Create a product",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": \"BEBIDA\",\n  \"description\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"price\": \"<double>\",\n  \"timeToPrepare\": \"<integer>\",\n  \"id\": \"<long>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"active\": \"<boolean>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products/product",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"product"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Product created successfully",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"category\": \"BEBIDA\",\n  \"description\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"price\": \"<double>\",\n  \"timeToPrepare\": \"<integer>\",\n  \"id\": \"<long>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"active\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/products/product",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"products",
+												"product"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{}"
+								},
+								{
+									"name": "When the category type is invalid",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"category\": \"BEBIDA\",\n  \"description\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"price\": \"<double>\",\n  \"timeToPrepare\": \"<integer>\",\n  \"id\": \"<long>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"active\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/products/product",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"products",
+												"product"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"name": "When can't find a product using the ID provided",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"category\": \"BEBIDA\",\n  \"description\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"price\": \"<double>\",\n  \"timeToPrepare\": \"<integer>\",\n  \"id\": \"<long>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"active\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/products/product",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"products",
+												"product"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{}"
+								},
+								{
+									"name": "When it is not possible to create the product",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"category\": \"BEBIDA\",\n  \"description\": \"<string>\",\n  \"isActive\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"price\": \"<double>\",\n  \"timeToPrepare\": \"<integer>\",\n  \"id\": \"<long>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"active\": \"<boolean>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/products/product",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"products",
+												"product"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "category",
+					"item": [
+						{
+							"name": "Find products by category",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/products/category?category=ACOMPANHAMENTO",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"category"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "ACOMPANHAMENTO",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Returns a list of products based on the specified category",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/products/category?category=ACOMPANHAMENTO",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"products",
+												"category"
+											],
+											"query": [
+												{
+													"key": "category",
+													"value": "ACOMPANHAMENTO",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"category\": \"BEBIDA\",\n    \"description\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"price\": \"<double>\",\n    \"timeToPrepare\": \"<integer>\",\n    \"id\": \"<long>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"active\": \"<boolean>\"\n  },\n  {\n    \"category\": \"SOBREMESA\",\n    \"description\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"price\": \"<double>\",\n    \"timeToPrepare\": \"<integer>\",\n    \"id\": \"<long>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"active\": \"<boolean>\"\n  }\n]"
+								},
+								{
+									"name": "When the category type is invalid",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/products/category?category=ACOMPANHAMENTO",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"products",
+												"category"
+											],
+											"query": [
+												{
+													"key": "category",
+													"value": "ACOMPANHAMENTO",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"name": "When can't find a product using the ID provided",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/products/category?category=ACOMPANHAMENTO",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"products",
+												"category"
+											],
+											"query": [
+												{
+													"key": "category",
+													"value": "ACOMPANHAMENTO",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"category\": \"BEBIDA\",\n    \"description\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"price\": \"<double>\",\n    \"timeToPrepare\": \"<integer>\",\n    \"id\": \"<long>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"active\": \"<boolean>\"\n  },\n  {\n    \"category\": \"SOBREMESA\",\n    \"description\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"price\": \"<double>\",\n    \"timeToPrepare\": \"<integer>\",\n    \"id\": \"<long>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"active\": \"<boolean>\"\n  }\n]"
+								},
+								{
+									"name": "When it is not possible to find the product",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/products/category?category=ACOMPANHAMENTO",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"products",
+												"category"
+											],
+											"query": [
+												{
+													"key": "category",
+													"value": "ACOMPANHAMENTO",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"category\": \"BEBIDA\",\n    \"description\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"price\": \"<double>\",\n    \"timeToPrepare\": \"<integer>\",\n    \"id\": \"<long>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"active\": \"<boolean>\"\n  },\n  {\n    \"category\": \"SOBREMESA\",\n    \"description\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"price\": \"<double>\",\n    \"timeToPrepare\": \"<integer>\",\n    \"id\": \"<long>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"active\": \"<boolean>\"\n  }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Find all products",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/products?isActive=<boolean>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "isActive",
+									"value": "<boolean>"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Returns a list of products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/products?isActive=<boolean>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									],
+									"query": [
+										{
+											"key": "isActive",
+											"value": "<boolean>"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"category\": \"BEBIDA\",\n    \"description\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"price\": \"<double>\",\n    \"timeToPrepare\": \"<integer>\",\n    \"id\": \"<long>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"active\": \"<boolean>\"\n  },\n  {\n    \"category\": \"SOBREMESA\",\n    \"description\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"price\": \"<double>\",\n    \"timeToPrepare\": \"<integer>\",\n    \"id\": \"<long>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"active\": \"<boolean>\"\n  }\n]"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/products?isActive=<boolean>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									],
+									"query": [
+										{
+											"key": "isActive",
+											"value": "<boolean>"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+						},
+						{
+							"name": "When can't find a products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/products?isActive=<boolean>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									],
+									"query": [
+										{
+											"key": "isActive",
+											"value": "<boolean>"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"category\": \"BEBIDA\",\n    \"description\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"price\": \"<double>\",\n    \"timeToPrepare\": \"<integer>\",\n    \"id\": \"<long>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"active\": \"<boolean>\"\n  },\n  {\n    \"category\": \"SOBREMESA\",\n    \"description\": \"<string>\",\n    \"isActive\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"price\": \"<double>\",\n    \"timeToPrepare\": \"<integer>\",\n    \"id\": \"<long>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"active\": \"<boolean>\"\n  }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "order",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "status",
+									"item": [
+										{
+											"name": "Get order status for the given id",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/orders/order/:id/status",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"orders",
+														"order",
+														":id",
+														"status"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<long>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"response": [
+												{
+													"name": "Order status found",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/orders/order/:id/status",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"orders",
+																"order",
+																":id",
+																"status"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												},
+												{
+													"name": "Bad Request",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/orders/order/:id/status",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"orders",
+																"order",
+																":id",
+																"status"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+												},
+												{
+													"name": "Order not found",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/orders/order/:id/status",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"orders",
+																"order",
+																":id",
+																"status"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												},
+												{
+													"name": "Internal server error",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/orders/order/:id/status",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"orders",
+																"order",
+																":id",
+																"status"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																}
+															]
+														}
+													},
+													"status": "Internal Server Error",
+													"code": 500,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Get order for the given id",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/orders/order/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"orders",
+												"order",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Order found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/orders/order/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"orders",
+														"order",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"isPayed\": \"<boolean>\",\n  \"products\": [\n    {\n      \"product\": {\n        \"category\": \"SOBREMESA\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"product\": {\n        \"category\": \"LANCHE\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"status\": \"PENDENTE\",\n  \"timeToPrepare\": \"<integer>\",\n  \"totalAmount\": \"<double>\",\n  \"id\": \"<long>\",\n  \"customer\": {\n    \"cpf\": \"<string>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"id\": \"<long>\",\n    \"lastName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"createdAt\": \"<dateTime>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+										},
+										{
+											"name": "Invalid id type",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/orders/order/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"orders",
+														"order",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"name": "Order not found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/orders/order/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"orders",
+														"order",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"isPayed\": \"<boolean>\",\n  \"products\": [\n    {\n      \"product\": {\n        \"category\": \"SOBREMESA\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"product\": {\n        \"category\": \"LANCHE\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"status\": \"PENDENTE\",\n  \"timeToPrepare\": \"<integer>\",\n  \"totalAmount\": \"<double>\",\n  \"id\": \"<long>\",\n  \"customer\": {\n    \"cpf\": \"<string>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"id\": \"<long>\",\n    \"lastName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"createdAt\": \"<dateTime>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+										},
+										{
+											"name": "Internal server error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/orders/order/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"orders",
+														"order",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"isPayed\": \"<boolean>\",\n  \"products\": [\n    {\n      \"product\": {\n        \"category\": \"SOBREMESA\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"product\": {\n        \"category\": \"LANCHE\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"status\": \"PENDENTE\",\n  \"timeToPrepare\": \"<integer>\",\n  \"totalAmount\": \"<double>\",\n  \"id\": \"<long>\",\n  \"customer\": {\n    \"cpf\": \"<string>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"id\": \"<long>\",\n    \"lastName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"createdAt\": \"<dateTime>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Delete a order for the given id",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/orders/order/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"orders",
+												"order",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Order deleted",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/orders/order/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"orders",
+														"order",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										},
+										{
+											"name": "Invalid id type",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/orders/order/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"orders",
+														"order",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"name": "Order not found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/orders/order/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"orders",
+														"order",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										},
+										{
+											"name": "Internal server error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/orders/order/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"orders",
+														"order",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Create a new order",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"<string>\",\n  \"productIds\": [\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/orders/order",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"orders",
+										"order"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Order created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"<string>\",\n  \"productIds\": [\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/orders/order",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"orders",
+												"order"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"isPayed\": \"<boolean>\",\n  \"products\": [\n    {\n      \"product\": {\n        \"category\": \"SOBREMESA\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"product\": {\n        \"category\": \"LANCHE\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"status\": \"PENDENTE\",\n  \"timeToPrepare\": \"<integer>\",\n  \"totalAmount\": \"<double>\",\n  \"id\": \"<long>\",\n  \"customer\": {\n    \"cpf\": \"<string>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"id\": \"<long>\",\n    \"lastName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"createdAt\": \"<dateTime>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+								},
+								{
+									"name": "CPF is required",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"<string>\",\n  \"productIds\": [\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/orders/order",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"orders",
+												"order"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"name": "Product not found for IDs: xpto",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"<string>\",\n  \"productIds\": [\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/orders/order",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"orders",
+												"order"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"isPayed\": \"<boolean>\",\n  \"products\": [\n    {\n      \"product\": {\n        \"category\": \"SOBREMESA\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"product\": {\n        \"category\": \"LANCHE\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"status\": \"PENDENTE\",\n  \"timeToPrepare\": \"<integer>\",\n  \"totalAmount\": \"<double>\",\n  \"id\": \"<long>\",\n  \"customer\": {\n    \"cpf\": \"<string>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"id\": \"<long>\",\n    \"lastName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"createdAt\": \"<dateTime>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Edit an order",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<long>\",\n  \"cpf\": \"<string>\",\n  \"status\": \"PENDENTE\",\n  \"productIds\": [\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/orders/order",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"orders",
+										"order"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Order updated",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<long>\",\n  \"cpf\": \"<string>\",\n  \"status\": \"PENDENTE\",\n  \"productIds\": [\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/orders/order",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"orders",
+												"order"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"isPayed\": \"<boolean>\",\n  \"products\": [\n    {\n      \"product\": {\n        \"category\": \"SOBREMESA\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"product\": {\n        \"category\": \"LANCHE\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"status\": \"PENDENTE\",\n  \"timeToPrepare\": \"<integer>\",\n  \"totalAmount\": \"<double>\",\n  \"id\": \"<long>\",\n  \"customer\": {\n    \"cpf\": \"<string>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"id\": \"<long>\",\n    \"lastName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"createdAt\": \"<dateTime>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+								},
+								{
+									"name": "Order already finalized when status is equals to FINALIZADO",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<long>\",\n  \"cpf\": \"<string>\",\n  \"status\": \"PENDENTE\",\n  \"productIds\": [\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/orders/order",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"orders",
+												"order"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"name": "Product not found for IDs: xpto",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<long>\",\n  \"cpf\": \"<string>\",\n  \"status\": \"PENDENTE\",\n  \"productIds\": [\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"quantity\": \"<integer>\"\n    }\n  ]\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/orders/order",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"orders",
+												"order"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"isPayed\": \"<boolean>\",\n  \"products\": [\n    {\n      \"product\": {\n        \"category\": \"SOBREMESA\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"product\": {\n        \"category\": \"LANCHE\",\n        \"description\": \"<string>\",\n        \"isActive\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"price\": \"<double>\",\n        \"timeToPrepare\": \"<integer>\",\n        \"id\": \"<long>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"active\": \"<boolean>\"\n      },\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"status\": \"PENDENTE\",\n  \"timeToPrepare\": \"<integer>\",\n  \"totalAmount\": \"<double>\",\n  \"id\": \"<long>\",\n  \"customer\": {\n    \"cpf\": \"<string>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"id\": \"<long>\",\n    \"lastName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"createdAt\": \"<dateTime>\"\n  },\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Get all orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/orders?status=EM_PREPARACAO",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "EM_PREPARACAO"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Orders retrieved",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/orders?status=EM_PREPARACAO",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"orders"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "EM_PREPARACAO"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"isPayed\": \"<boolean>\",\n    \"products\": [\n      {\n        \"product\": {\n          \"category\": \"BEBIDA\",\n          \"description\": \"<string>\",\n          \"isActive\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"price\": \"<double>\",\n          \"timeToPrepare\": \"<integer>\",\n          \"id\": \"<long>\",\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"active\": \"<boolean>\"\n        },\n        \"quantity\": \"<integer>\"\n      },\n      {\n        \"product\": {\n          \"category\": \"ACOMPANHAMENTO\",\n          \"description\": \"<string>\",\n          \"isActive\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"price\": \"<double>\",\n          \"timeToPrepare\": \"<integer>\",\n          \"id\": \"<long>\",\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"active\": \"<boolean>\"\n        },\n        \"quantity\": \"<integer>\"\n      }\n    ],\n    \"status\": \"FINALIZADO\",\n    \"timeToPrepare\": \"<integer>\",\n    \"totalAmount\": \"<double>\",\n    \"id\": \"<long>\",\n    \"customer\": {\n      \"cpf\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"id\": \"<long>\",\n      \"lastName\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  {\n    \"isPayed\": \"<boolean>\",\n    \"products\": [\n      {\n        \"product\": {\n          \"category\": \"ACOMPANHAMENTO\",\n          \"description\": \"<string>\",\n          \"isActive\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"price\": \"<double>\",\n          \"timeToPrepare\": \"<integer>\",\n          \"id\": \"<long>\",\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"active\": \"<boolean>\"\n        },\n        \"quantity\": \"<integer>\"\n      },\n      {\n        \"product\": {\n          \"category\": \"SOBREMESA\",\n          \"description\": \"<string>\",\n          \"isActive\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"price\": \"<double>\",\n          \"timeToPrepare\": \"<integer>\",\n          \"id\": \"<long>\",\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"active\": \"<boolean>\"\n        },\n        \"quantity\": \"<integer>\"\n      }\n    ],\n    \"status\": \"PAGAMENTO_RECUSADO\",\n    \"timeToPrepare\": \"<integer>\",\n    \"totalAmount\": \"<double>\",\n    \"id\": \"<long>\",\n    \"customer\": {\n      \"cpf\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"id\": \"<long>\",\n      \"lastName\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n]"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/orders?status=EM_PREPARACAO",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"orders"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "EM_PREPARACAO"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+						},
+						{
+							"name": "No orders found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/orders?status=EM_PREPARACAO",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"orders"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "EM_PREPARACAO"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"isPayed\": \"<boolean>\",\n    \"products\": [\n      {\n        \"product\": {\n          \"category\": \"BEBIDA\",\n          \"description\": \"<string>\",\n          \"isActive\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"price\": \"<double>\",\n          \"timeToPrepare\": \"<integer>\",\n          \"id\": \"<long>\",\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"active\": \"<boolean>\"\n        },\n        \"quantity\": \"<integer>\"\n      },\n      {\n        \"product\": {\n          \"category\": \"ACOMPANHAMENTO\",\n          \"description\": \"<string>\",\n          \"isActive\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"price\": \"<double>\",\n          \"timeToPrepare\": \"<integer>\",\n          \"id\": \"<long>\",\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"active\": \"<boolean>\"\n        },\n        \"quantity\": \"<integer>\"\n      }\n    ],\n    \"status\": \"FINALIZADO\",\n    \"timeToPrepare\": \"<integer>\",\n    \"totalAmount\": \"<double>\",\n    \"id\": \"<long>\",\n    \"customer\": {\n      \"cpf\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"id\": \"<long>\",\n      \"lastName\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  {\n    \"isPayed\": \"<boolean>\",\n    \"products\": [\n      {\n        \"product\": {\n          \"category\": \"ACOMPANHAMENTO\",\n          \"description\": \"<string>\",\n          \"isActive\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"price\": \"<double>\",\n          \"timeToPrepare\": \"<integer>\",\n          \"id\": \"<long>\",\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"active\": \"<boolean>\"\n        },\n        \"quantity\": \"<integer>\"\n      },\n      {\n        \"product\": {\n          \"category\": \"SOBREMESA\",\n          \"description\": \"<string>\",\n          \"isActive\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"price\": \"<double>\",\n          \"timeToPrepare\": \"<integer>\",\n          \"id\": \"<long>\",\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"active\": \"<boolean>\"\n        },\n        \"quantity\": \"<integer>\"\n      }\n    ],\n    \"status\": \"PAGAMENTO_RECUSADO\",\n    \"timeToPrepare\": \"<integer>\",\n    \"totalAmount\": \"<double>\",\n    \"id\": \"<long>\",\n    \"customer\": {\n      \"cpf\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"id\": \"<long>\",\n      \"lastName\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n]"
+						},
+						{
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/orders?status=EM_PREPARACAO",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"orders"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "EM_PREPARACAO"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"isPayed\": \"<boolean>\",\n    \"products\": [\n      {\n        \"product\": {\n          \"category\": \"BEBIDA\",\n          \"description\": \"<string>\",\n          \"isActive\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"price\": \"<double>\",\n          \"timeToPrepare\": \"<integer>\",\n          \"id\": \"<long>\",\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"active\": \"<boolean>\"\n        },\n        \"quantity\": \"<integer>\"\n      },\n      {\n        \"product\": {\n          \"category\": \"ACOMPANHAMENTO\",\n          \"description\": \"<string>\",\n          \"isActive\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"price\": \"<double>\",\n          \"timeToPrepare\": \"<integer>\",\n          \"id\": \"<long>\",\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"active\": \"<boolean>\"\n        },\n        \"quantity\": \"<integer>\"\n      }\n    ],\n    \"status\": \"FINALIZADO\",\n    \"timeToPrepare\": \"<integer>\",\n    \"totalAmount\": \"<double>\",\n    \"id\": \"<long>\",\n    \"customer\": {\n      \"cpf\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"id\": \"<long>\",\n      \"lastName\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  {\n    \"isPayed\": \"<boolean>\",\n    \"products\": [\n      {\n        \"product\": {\n          \"category\": \"ACOMPANHAMENTO\",\n          \"description\": \"<string>\",\n          \"isActive\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"price\": \"<double>\",\n          \"timeToPrepare\": \"<integer>\",\n          \"id\": \"<long>\",\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"active\": \"<boolean>\"\n        },\n        \"quantity\": \"<integer>\"\n      },\n      {\n        \"product\": {\n          \"category\": \"SOBREMESA\",\n          \"description\": \"<string>\",\n          \"isActive\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"price\": \"<double>\",\n          \"timeToPrepare\": \"<integer>\",\n          \"id\": \"<long>\",\n          \"createdAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"active\": \"<boolean>\"\n        },\n        \"quantity\": \"<integer>\"\n      }\n    ],\n    \"status\": \"PAGAMENTO_RECUSADO\",\n    \"timeToPrepare\": \"<integer>\",\n    \"totalAmount\": \"<double>\",\n    \"id\": \"<long>\",\n    \"customer\": {\n      \"cpf\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"id\": \"<long>\",\n      \"lastName\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "customer",
+					"item": [
+						{
+							"name": "{cpf}",
+							"item": [
+								{
+									"name": "fetch Customer By Cpf",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/customers/customer/:cpf",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												"customer",
+												":cpf"
+											],
+											"variable": [
+												{
+													"key": "cpf",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Returns the data of specific customer.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/customers/customer/:cpf",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"customers",
+														"customer",
+														":cpf"
+													],
+													"variable": [
+														{
+															"key": "cpf"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"cpf\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"id\": \"<long>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/customers/customer/:cpf",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"customers",
+														"customer",
+														":cpf"
+													],
+													"variable": [
+														{
+															"key": "cpf"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+										},
+										{
+											"name": "When don't find a customer using the CPF number specific.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/customers/customer/:cpf",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"customers",
+														"customer",
+														":cpf"
+													],
+													"variable": [
+														{
+															"key": "cpf"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"cpf\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"id\": \"<long>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}"
+										},
+										{
+											"name": "When it is not possible to find the customer.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/customers/customer/:cpf",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"customers",
+														"customer",
+														":cpf"
+													],
+													"variable": [
+														{
+															"key": "cpf"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"cpf\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"id\": \"<long>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Create a costumer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"id\": \"<long>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/customers/customer",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers",
+										"customer"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Customer created successfully",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"id\": \"<long>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/customer",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												"customer"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"cpf\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"id\": \"<long>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}"
+								},
+								{
+									"name": "When the CPF already exists in database",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"id\": \"<long>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/customer",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												"customer"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+								},
+								{
+									"name": "When can't find a customer using the CPF number",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"id\": \"<long>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/customer",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												"customer"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"cpf\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"id\": \"<long>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}"
+								},
+								{
+									"name": "When it isn't possible to create the customer",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cpf\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"id\": \"<long>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/customers/customer",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"customers",
+												"customer"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"cpf\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"id\": \"<long>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"createdAt\": \"<dateTime>\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "fetch All Customers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Returns a list with all customers of database.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/customers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"cpf\": \"<string>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"id\": \"<long>\",\n    \"lastName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"createdAt\": \"<dateTime>\"\n  },\n  {\n    \"cpf\": \"<string>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"id\": \"<long>\",\n    \"lastName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"createdAt\": \"<dateTime>\"\n  }\n]"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/customers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+						},
+						{
+							"name": "When it is not possible to find a list of customers.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/customers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"customers"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"cpf\": \"<string>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"id\": \"<long>\",\n    \"lastName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"createdAt\": \"<dateTime>\"\n  },\n  {\n    \"cpf\": \"<string>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"id\": \"<long>\",\n    \"lastName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"createdAt\": \"<dateTime>\"\n  }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "checkout",
+			"item": [
+				{
+					"name": "Perform shopping cart checkout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"<string>\",\n  \"items\": [\n    {\n      \"amount\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"price\": \"<double>\"\n    },\n    {\n      \"amount\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"price\": \"<double>\"\n    }\n  ],\n  \"totalAmount\": \"<double>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/checkout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"checkout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Checkout completed successfully",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<string>\",\n  \"items\": [\n    {\n      \"amount\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"price\": \"<double>\"\n    },\n    {\n      \"amount\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"price\": \"<double>\"\n    }\n  ],\n  \"totalAmount\": \"<double>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/checkout",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"checkout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"<string>\",\n  \"items\": [\n    {\n      \"amount\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"price\": \"<double>\"\n    },\n    {\n      \"amount\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"price\": \"<double>\"\n    }\n  ],\n  \"totalAmount\": \"<double>\"\n}"
+						},
+						{
+							"name": "Error when performing checkout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<string>\",\n  \"items\": [\n    {\n      \"amount\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"price\": \"<double>\"\n    },\n    {\n      \"amount\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"price\": \"<double>\"\n    }\n  ],\n  \"totalAmount\": \"<double>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/checkout",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"checkout"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"httpCode\": \"<integer>\",\n  \"message\": \"<string>\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}
