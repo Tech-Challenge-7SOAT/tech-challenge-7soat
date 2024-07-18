@@ -99,4 +99,23 @@ class OrderController(
         val orders = orderUseCase.listOrders(status)
         return ResponseEntity.ok(orders.map { order -> presenter.toDTO(order) })
     }
+
+    @GetMapping("/order/{id}/status")
+    @Operation(summary = "Get order status for the given id")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Order status found"),
+            ApiResponse(responseCode = "404", description = "Order not found"),
+            ApiResponse(responseCode = "500", description = "Internal server error")
+        ]
+    )
+    fun getOrderStatus(@PathVariable(required = true) id: Long): ResponseEntity<Any> {
+        val order = orderUseCase.findOrderById(id)
+        return ResponseEntity.ok(
+            mapOf(
+                "orderId" to order.id,
+                "status" to order.status
+            )
+        )
+    }
 }
