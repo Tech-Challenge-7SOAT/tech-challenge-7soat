@@ -10,10 +10,9 @@ import com.fiap.fastfood.core.entity.CustomerEntity
 import com.fiap.fastfood.core.entity.OrderEntity
 import com.fiap.fastfood.core.entity.OrderProductEntity
 import com.fiap.fastfood.core.entity.ProductEntity
-import com.fiap.fastfood.core.exception.OrderNotFoundException
 import com.fiap.fastfood.core.exception.OrderException
+import com.fiap.fastfood.core.exception.OrderNotFoundException
 import com.fiap.fastfood.core.valueObject.Status
-import com.fiap.produto.exception.InternalServerErrorException
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
@@ -35,7 +34,7 @@ class OrderUseCaseImpl(
 
     override fun create(order: OrderRequestCreateDTO): OrderEntity {
         validateCpf(order.cpf)
-        val customerEntity = findCustomerByCpf(order.cpf!!)
+        val customerEntity = findCustomerByCpf(order.cpf)
         val products = findProductsByIds(order.productIds.map { it.id })
 
         val orderEntity = OrderEntity(
@@ -57,7 +56,7 @@ class OrderUseCaseImpl(
     override fun update(order: OrderRequestUpdateDTO): OrderEntity {
         if (order.cpf.isNullOrEmpty())
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "CPF is required for updating an order")
-        val orderEntity = orderRepository.findById(order.id!!).orElseThrow { OrderNotFoundException() }
+        val orderEntity = orderRepository.findById(order.id).orElseThrow { OrderNotFoundException() }
         validateOrderStatus(orderEntity.status)
         val customerEntity = findCustomerByCpf(order.cpf)
         var products = order.productIds?.let { findProductsByIds(it.map { it.id }) }
@@ -66,7 +65,7 @@ class OrderUseCaseImpl(
             totalAmount = products?.sumOf { it.price } ?: totalAmount
             timeToPrepare = products?.sumOf { it.timeToPrepare } ?: timeToPrepare
             customer = customerEntity
-            isPayed = if (status != Status.PENDENTE) true else false
+            isPayed = status != Status.PENDENTE
             status = order.status?.let { it } ?: status
             if (products != null && order.productIds != null) {
                 val orderProducts = createOrderProducts(products, order.productIds, this)
@@ -145,13 +144,27 @@ class OrderUseCaseImpl(
         }?.toMutableList() ?: mutableListOf()
     }
 
+    override fun updateStatus(id: Long, status: Status): Boolean {
+        val order = orderRepository.findById(id).orElseThrow { OrderNotFoundException() }
+        if (order.hasFinished()) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Order already finalized")
+        }
+
+        with(order) {
+            this.status = status
+            orderRepository.save(this)
+        }
+
+        return true
+    }
+
     private fun validateCpf(cpf: String?) {
         if (cpf.isNullOrEmpty())
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "CPF is required")
     }
 
     private fun validateOrderStatus(status: Status) {
-        if (status == Status.FINALIZADO)
+        if (status == Status.FINALIZADO || status == Status.PAGAMENTO_RECUSADO)
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Order already finalized")
     }
 }
