@@ -12,7 +12,6 @@ import com.fiap.fastfood.core.entity.OrderProductEntity
 import com.fiap.fastfood.core.entity.ProductEntity
 import com.fiap.fastfood.core.exception.OrderException
 import com.fiap.fastfood.core.exception.OrderNotFoundException
-import com.fiap.fastfood.core.valueObject.PaymentStatus
 import com.fiap.fastfood.core.valueObject.Status
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -165,7 +164,7 @@ class OrderUseCaseImpl(
     }
 
     private fun validateOrderStatus(status: Status) {
-        if (status == Status.FINALIZADO)
+        if (status == Status.FINALIZADO || status == Status.PAGAMENTO_RECUSADO)
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Order already finalized")
     }
 }

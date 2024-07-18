@@ -28,7 +28,7 @@ class OrderPaymentWebhookController(private val orderUseCase: OrderUseCaseImpl) 
             mediaType = MediaType.APPLICATION_JSON_VALUE,
             schema = Schema(implementation = OrderPaymentDTO::class),
             examples = [
-                ExampleObject(name = "Pagamento aprovado", value = "{\"orderId\": 1,\"status\": \"PAGAMENTO_APROVADO\"}"),
+                ExampleObject(name = "Pagamento recebido", value = "{\"orderId\": 1,\"status\": \"RECEBIDO\"}"),
                 ExampleObject(name = "Pagamento recusado", value = "{\"orderId\": 1,\"status\": \"PAGAMENTO_RECUSADO\"}")
             ]
         )]
