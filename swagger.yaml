@@ -1,0 +1,1336 @@
+  # 20240721151916
+  # http://localhost:8080/v3/api-docs
+    
+    {
+      "openapi": "3.0.1",
+      "info": {
+        "title": "OpenAPI definition",
+        "version": "v0"
+      },
+      "servers": [
+        {
+          "url": "http://localhost:8080",
+          "description": "Generated server url"
+        }
+      ],
+      "tags": [
+        {
+          "name": "Order",
+          "description": "Create, remove, edit and search orders by status"
+        },
+        {
+          "name": "Customer",
+          "description": "Create and search customer by cpf."
+        },
+        {
+          "name": "Product",
+          "description": "Create, remove, edit and search products by category."
+        },
+        {
+          "name": "Checkout",
+          "description": "Finalize the shopping cart"
+        },
+        {
+          "name": "Webhook",
+          "description": "Receive payment webhook"
+        }
+      ],
+      "paths": {
+        "/webhook/payment": {
+          "post": {
+            "tags": [
+              "Webhook"
+            ],
+            "summary": "Receive payment webhook",
+            "operationId": "index",
+            "requestBody": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/OrderPaymentDTO"
+                  },
+                  "examples": {
+                    "Pagamento recebido": {
+                      "description": "Pagamento recebido",
+                      "value": {
+                        "orderId": 1,
+                        "status": "RECEBIDO"
+                      }
+                    },
+                    "Pagamento recusado": {
+                      "description": "Pagamento recusado",
+                      "value": {
+                        "orderId": 1,
+                        "status": "PAGAMENTO_RECUSADO"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": true
+            },
+            "responses": {
+              "200": {
+                "description": "Payment webhook received",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Order not found",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal server error",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/products/product": {
+          "post": {
+            "tags": [
+              "Product"
+            ],
+            "summary": "Create a product",
+            "operationId": "createProduct",
+            "requestBody": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProductDTO"
+                  }
+                }
+              },
+              "required": true
+            },
+            "responses": {
+              "201": {
+                "description": "Product created successfully",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "When the category type is invalid",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "When can't find a product using the ID provided",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "When it is not possible to create the product",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/orders/order": {
+          "post": {
+            "tags": [
+              "Order"
+            ],
+            "summary": "Create a new order",
+            "operationId": "saveOrder",
+            "requestBody": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/OrderRequestCreateDTO"
+                  }
+                }
+              },
+              "required": true
+            },
+            "responses": {
+              "201": {
+                "description": "Order created",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/OrderDTO"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "CPF is required",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Product not found for IDs: xpto",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/OrderDTO"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "patch": {
+            "tags": [
+              "Order"
+            ],
+            "summary": "Edit an order",
+            "operationId": "editOrder",
+            "requestBody": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/OrderRequestUpdateDTO"
+                  }
+                }
+              },
+              "required": true
+            },
+            "responses": {
+              "200": {
+                "description": "Order updated",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/OrderDTO"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Order already finalized when status is equals to FINALIZADO",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Product not found for IDs: xpto",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/OrderDTO"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/customers/customer": {
+          "post": {
+            "tags": [
+              "Customer"
+            ],
+            "summary": "Create a costumer",
+            "operationId": "saveCustomer",
+            "requestBody": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CustomerDTO"
+                  }
+                }
+              },
+              "required": true
+            },
+            "responses": {
+              "201": {
+                "description": "Customer created successfully",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/CustomerDTO"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "When the CPF already exists in database",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "When can't find a customer using the CPF number",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/CustomerDTO"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "When it isn't possible to create the customer",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/CustomerDTO"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/checkout": {
+          "post": {
+            "tags": [
+              "Checkout"
+            ],
+            "summary": "Perform shopping cart checkout",
+            "operationId": "index_1",
+            "requestBody": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CartDTO"
+                  }
+                }
+              },
+              "required": true
+            },
+            "responses": {
+              "200": {
+                "description": "Checkout completed successfully",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/CartDTO"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Error when performing checkout",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/products/product/{id}": {
+          "delete": {
+            "tags": [
+              "Product"
+            ],
+            "summary": "Delete a product",
+            "operationId": "removeProduct",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            ],
+            "responses": {
+              "204": {
+                "description": "Product deleted successfully",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "When can't find a product using the ID provided",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "When it is not possible to delete the product",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "patch": {
+            "tags": [
+              "Product"
+            ],
+            "summary": "Edit a product",
+            "operationId": "updateProduct",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            ],
+            "requestBody": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProductDTO"
+                  }
+                }
+              },
+              "required": true
+            },
+            "responses": {
+              "204": {
+                "description": "Product edited successfully",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "When can't find a product using the ID provided",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "When it is not possible to update the product",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/products": {
+          "get": {
+            "tags": [
+              "Product"
+            ],
+            "summary": "Find all products",
+            "operationId": "findAllProducts",
+            "parameters": [
+              {
+                "name": "isActive",
+                "in": "query",
+                "required": false,
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Returns a list of products",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ProductDTO"
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "When can't find a products",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ProductDTO"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/products/category": {
+          "get": {
+            "tags": [
+              "Product"
+            ],
+            "summary": "Find products by category",
+            "operationId": "findProductsByCategory",
+            "parameters": [
+              {
+                "name": "category",
+                "in": "query",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "LANCHE",
+                    "ACOMPANHAMENTO",
+                    "BEBIDA",
+                    "SOBREMESA"
+                  ]
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Returns a list of products based on the specified category",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ProductDTO"
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "When the category type is invalid",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "When can't find a product using the ID provided",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ProductDTO"
+                      }
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "When it is not possible to find the product",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ProductDTO"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/orders": {
+          "get": {
+            "tags": [
+              "Order"
+            ],
+            "summary": "Get all orders",
+            "operationId": "getOrders",
+            "parameters": [
+              {
+                "name": "status",
+                "in": "query",
+                "required": false,
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "PRONTO",
+                    "EM_PREPARACAO",
+                    "RECEBIDO",
+                    "FINALIZADO",
+                    "PENDENTE",
+                    "PAGAMENTO_RECUSADO"
+                  ]
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Orders retrieved",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OrderDTO"
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "No orders found",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OrderDTO"
+                      }
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal server error",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OrderDTO"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/orders/order/{id}": {
+          "get": {
+            "tags": [
+              "Order"
+            ],
+            "summary": "Get order for the given id",
+            "operationId": "getOrder",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Order found",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/OrderDTO"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Invalid id type",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Order not found",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/OrderDTO"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal server error",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/OrderDTO"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "delete": {
+            "tags": [
+              "Order"
+            ],
+            "summary": "Delete a order for the given id",
+            "operationId": "deleteOrder",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            ],
+            "responses": {
+              "204": {
+                "description": "Order deleted",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Invalid id type",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Order not found",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal server error",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/orders/order/{id}/status": {
+          "get": {
+            "tags": [
+              "Order"
+            ],
+            "summary": "Get order status for the given id",
+            "operationId": "getOrderStatus",
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Order status found",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "Order not found",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal server error",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/customers": {
+          "get": {
+            "tags": [
+              "Customer"
+            ],
+            "operationId": "fetchAllCustomers",
+            "responses": {
+              "200": {
+                "description": "Returns a list with all customers of database.",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CustomerDTO"
+                      }
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "When it is not possible to find a list of customers.",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CustomerDTO"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/customers/customer/{cpf}": {
+          "get": {
+            "tags": [
+              "Customer"
+            ],
+            "operationId": "fetchCustomerByCpf",
+            "parameters": [
+              {
+                "name": "cpf",
+                "in": "path",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Returns the data of specific customer.",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/CustomerDTO"
+                    }
+                  }
+                }
+              },
+              "400": {
+                "description": "Bad Request",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/ExceptionResponse"
+                    }
+                  }
+                }
+              },
+              "404": {
+                "description": "When don't find a customer using the CPF number specific.",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/CustomerDTO"
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "When it is not possible to find the customer.",
+                "content": {
+                  "*/*": {
+                    "schema": {
+                      "$ref": "#/components/schemas/CustomerDTO"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "components": {
+        "schemas": {
+          "ExceptionResponse": {
+            "required": [
+              "httpCode",
+              "message"
+            ],
+            "type": "object",
+            "properties": {
+              "httpCode": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          },
+          "OrderPaymentDTO": {
+            "required": [
+              "orderId",
+              "status"
+            ],
+            "type": "object",
+            "properties": {
+              "orderId": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "PRONTO",
+                  "EM_PREPARACAO",
+                  "RECEBIDO",
+                  "FINALIZADO",
+                  "PENDENTE",
+                  "PAGAMENTO_RECUSADO"
+                ]
+              }
+            }
+          },
+          "ProductDTO": {
+            "required": [
+              "category",
+              "description",
+              "isActive",
+              "name",
+              "price",
+              "timeToPrepare"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "isActive": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "price": {
+                "minimum": 0,
+                "type": "number",
+                "format": "double"
+              },
+              "timeToPrepare": {
+                "minimum": 0,
+                "type": "integer",
+                "format": "int32"
+              },
+              "category": {
+                "type": "string",
+                "enum": [
+                  "LANCHE",
+                  "ACOMPANHAMENTO",
+                  "BEBIDA",
+                  "SOBREMESA"
+                ]
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "active": {
+                "type": "boolean",
+                "writeOnly": true
+              }
+            }
+          },
+          "OrderRequestCreateDTO": {
+            "required": [
+              "cpf",
+              "productIds"
+            ],
+            "type": "object",
+            "properties": {
+              "cpf": {
+                "type": "string"
+              },
+              "productIds": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductsItens"
+                }
+              }
+            }
+          },
+          "ProductsItens": {
+            "required": [
+              "id",
+              "quantity"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "quantity": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "CustomerDTO": {
+            "required": [
+              "cpf",
+              "email",
+              "firstName",
+              "id",
+              "lastName",
+              "phoneNumber"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "cpf": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "phoneNumber": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "OrderDTO": {
+            "required": [
+              "isPayed",
+              "products",
+              "status",
+              "timeToPrepare",
+              "totalAmount"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "customer": {
+                "$ref": "#/components/schemas/CustomerDTO"
+              },
+              "isPayed": {
+                "type": "boolean"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "PRONTO",
+                  "EM_PREPARACAO",
+                  "RECEBIDO",
+                  "FINALIZADO",
+                  "PENDENTE",
+                  "PAGAMENTO_RECUSADO"
+                ]
+              },
+              "products": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/OrderProductsItensDTO"
+                }
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "totalAmount": {
+                "type": "number",
+                "format": "double"
+              },
+              "timeToPrepare": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "OrderProductsItensDTO": {
+            "required": [
+              "product",
+              "quantity"
+            ],
+            "type": "object",
+            "properties": {
+              "quantity": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "product": {
+                "$ref": "#/components/schemas/ProductDTO"
+              }
+            }
+          },
+          "CartDTO": {
+            "required": [
+              "id",
+              "items",
+              "totalAmount"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CartItemDTO"
+                }
+              },
+              "totalAmount": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          },
+          "CartItemDTO": {
+            "required": [
+              "amount",
+              "id",
+              "name",
+              "price"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "amount": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "price": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          },
+          "OrderRequestUpdateDTO": {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "cpf": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "PRONTO",
+                  "EM_PREPARACAO",
+                  "RECEBIDO",
+                  "FINALIZADO",
+                  "PENDENTE",
+                  "PAGAMENTO_RECUSADO"
+                ]
+              },
+              "productIds": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductsItens"
+                }
+              }
+            }
+          }
+        }
+      }
+    }

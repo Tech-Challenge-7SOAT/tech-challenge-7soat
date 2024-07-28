@@ -26,7 +26,6 @@ class ProductController(
     @ApiResponses(value = [
         ApiResponse(responseCode = "201", description = "Product created successfully"),
         ApiResponse(responseCode = "400", description = "When the category type is invalid"),
-        ApiResponse(responseCode = "404", description = "When can't find a product using the ID provided"),
         ApiResponse(responseCode = "500", description = "When it is not possible to create the product")
     ])
     fun createProduct(
@@ -42,7 +41,7 @@ class ProductController(
     @ApiResponses(value = [
         ApiResponse(responseCode = "200", description = "Returns a list of products based on the specified category"),
         ApiResponse(responseCode = "400", description = "When the category type is invalid"),
-        ApiResponse(responseCode = "404", description = "When can't find a product using the ID provided"),
+        ApiResponse(responseCode = "404", description = "When can't find a product using the Category provided"),
         ApiResponse(responseCode = "500", description = "When it is not possible to find the product")
     ])
     fun findProductsByCategory(
