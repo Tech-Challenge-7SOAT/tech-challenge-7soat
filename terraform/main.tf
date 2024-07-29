@@ -28,7 +28,7 @@ resource "kubernetes_deployment" "fastfood-deployment" {
       spec {
         container {
           name  = "fastfood-api"
-          image = "mariusso/fastfood-api:0.0.2"
+          image = "mariusso/fastfood-api:0.0.3"
           port {
             container_port = 8080
           }
@@ -138,7 +138,6 @@ resource "kubernetes_service" "fastfood-service" {
     namespace = kubernetes_namespace.fastfood-namespace.metadata[0].name
   }
   spec {
-    type      = "LoadBalancer"
     selector  = {
       app = kubernetes_deployment.fastfood-deployment.spec[0].template[0].metadata[0].labels.app
     }
