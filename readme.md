@@ -85,13 +85,13 @@ A aplicação estará disponível no endereço gerado pelo comando "minikube ser
 
 ### A documentação da API, gerada pelo Swagger, pode ser acessada em: 
 - https://{SERVICE-IP:PORT}/swagger-ui/index.html;
-- Arquivo "swagger.yaml" no diretório "docs".
+- [Arquivo "swagger.yaml" no diretório "docs".](https://github.com/Tech-Challenge-7SOAT/tech-challenge-7soat/blob/master/docs/swagger.yaml)
 
 ## Desenho da Infraestrutura
 - [Arquivo "infraestrutura.jpeg" no diretório "docs"](https://github.com/Tech-Challenge-7SOAT/tech-challenge-7soat/blob/master/docs/infraestrutura.jpeg)
 
 ## Collection para Testes
-- Arquivo "postman_collection.json" no diretório "docs"
+- [Arquivo "postman_collection.json" no diretório "docs"](https://github.com/Tech-Challenge-7SOAT/tech-challenge-7soat/blob/master/docs/postman-collection.json)
 
 # Guia de Utilização
 
