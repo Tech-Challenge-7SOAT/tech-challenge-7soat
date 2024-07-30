@@ -88,7 +88,7 @@ A aplicação estará disponível no endereço gerado pelo comando "minikube ser
 - Arquivo "swagger.yaml" no diretório "docs".
 
 ## Desenho da Infraestrutura
-- Arquivo "infraestrutura.jpeg" no diretório "docs"
+- [Arquivo "infraestrutura.jpeg" no diretório "docs"](https://github.com/Tech-Challenge-7SOAT/tech-challenge-7soat/blob/master/docs/infraestrutura.jpeg)
 
 ## Collection para Testes
 - Arquivo "postman_collection.json" no diretório "docs"
