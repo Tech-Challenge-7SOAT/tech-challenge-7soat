@@ -26,7 +26,7 @@ Este projeto é uma aplicação de gestão de pedidos para um fastfood para aten
 - **MiniKube**: Para orquestrar a execução da aplicação em containers.
 
 ## Video de Demonstração da Arquitetura
-- **[Infraestrutura]**: 
+- **[Infraestrutura]**: https://youtu.be/N3vMcbQbMwI
 - **[API's]**: https://www.youtube.com/watch?v=z9F2ppayEC4
 
 ## Como Iniciar o Projeto Localmente
@@ -66,21 +66,32 @@ Antes de iniciar o projeto, você precisa instalar algumas ferramentas:
    terraform plan
    terraform apply --auto-approve
 
-5. **Acesse a Aplicação**
+5. **Executar os comandos do Minikube**
 
-A aplicação estará disponível em: http://localhost:8080
+   ```bash
+   minikube dashboard
+   minikube service fastfood-api -n fastfood-api
+   
+6. **Realizar teste de carga**
+
+   ```bash
+   k6 run --vus 10 --duration 30s k6.js
+
+7. **Acesse a Aplicação**
+
+A aplicação estará disponível no endereço gerado pelo comando "minikube service fastfood-api -n fastfood-api".
 
 ## Documentação da API
 
 ### A documentação da API, gerada pelo Swagger, pode ser acessada em: 
-- https://localhost:8080/swagger-ui/index.html
-- Arquivo "swagger.yaml" na raiz do projeto
+- https://{SERVICE-IP:PORT}/swagger-ui/index.html;
+- Arquivo "swagger.yaml" no diretório "docs".
 
 ## Desenho da Infraestrutura
-- Arquivo "infraestrutura.png" na raiz do projeto
+- Arquivo "infraestrutura.jpeg" no diretório "docs"
 
 ## Collection para Testes
-- Arquivo "postman_collection.json" na raiz do projeto
+- Arquivo "postman_collection.json" no diretório "docs"
 
 # Guia de Utilização
 
