@@ -1,10 +1,9 @@
 package com.fiap.fastfood.adapter.driver.controller.advice
 
-import com.fiap.fastfood.core.domain.ExceptionResponse
+import com.fiap.fastfood.core.dto.exception.ExceptionResponse
 import com.fiap.fastfood.core.exception.InvalidIdTypeException
 import com.fiap.fastfood.core.exception.OrderNotFoundException
 import com.fiap.produto.exception.InternalServerErrorException
-import com.fiap.produto.exception.InvalidProductCategoryException
 import com.fiap.produto.exception.ProductNotFoundByCategoryException
 import com.fiap.produto.exception.ProductNotFoundException
 import org.springframework.dao.DataIntegrityViolationException

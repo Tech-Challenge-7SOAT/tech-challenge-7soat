@@ -1,8 +1,6 @@
 package com.fiap.fastfood.core.entity
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fiap.fastfood.core.domain.Order
 import com.fiap.fastfood.core.valueObject.Status
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
@@ -16,27 +14,27 @@ import java.sql.Timestamp
 class OrderEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long?,
+    val id: Long? = null,
 
     @Column(name = "total_amount", nullable = false)
-    val totalAmount: Double?,
+    var totalAmount: Double,
+
+    @Column(name = "time_to_prepare", nullable = false, columnDefinition = "integer default 0")
+    var timeToPrepare: Int = 0,
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     var customer: CustomerEntity?,
 
     @Column(name = "is_payed")
-    val isPayed: Boolean = false,
+    var isPayed: Boolean = false,
 
-    val status: Status,
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    var status: Status,
 
-    @ManyToMany(cascade = [CascadeType.ALL])
-    @JoinTable(
-        name = "tb_combos",
-        joinColumns = [JoinColumn(name = "order_id")],
-        inverseJoinColumns = [JoinColumn(name = "product_id")]
-    )
-    var products: MutableList<ProductEntity> = mutableListOf(),
+    @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var products: MutableList<OrderProductEntity> = mutableListOf(),
 
     @Column(name = "created_at")
     @CreationTimestamp
@@ -46,11 +44,16 @@ class OrderEntity(
     @Column(name = "updated_at")
     @UpdateTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss'Z'")
-    val updatedAt: Timestamp? = null
+    val updatedAt: Timestamp? = null,
+
+    @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var orderProducts: MutableList<OrderProductEntity> = mutableListOf()
 ) {
+
     constructor() : this(
         -1L,
-        null,
+        0.0,
+        0,
         CustomerEntity(-1L, "", "", "", "", ""),
         false,
         Status.PENDENTE,
@@ -59,7 +62,5 @@ class OrderEntity(
         null
     )
 
-    fun toDomain(): Order {
-        return Order(id, customer?.toDomain(), isPayed, status, products.map { it.toDomain() }, createdAt, updatedAt)
-    }
+    fun hasFinished(): Boolean = status == Status.FINALIZADO
 }

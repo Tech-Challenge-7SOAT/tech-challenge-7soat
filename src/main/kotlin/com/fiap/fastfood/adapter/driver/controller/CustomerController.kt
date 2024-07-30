@@ -1,8 +1,9 @@
 package com.fiap.fastfood.adapter.driver.controller
 
-import com.fiap.fastfood.core.application.port.service.CustomerService
-import com.fiap.fastfood.core.application.port.repository.CustomerRepository
-import com.fiap.fastfood.core.domain.Customer
+import com.fiap.fastfood.core.application.useCase.customer.CustomerUseCase
+import com.fiap.fastfood.core.application.port.gateway.CustomerRepository
+import com.fiap.fastfood.core.application.port.presenter.CustomerPresenter
+import com.fiap.fastfood.core.dto.customer.CustomerDTO
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
@@ -16,8 +17,9 @@ import org.springframework.web.server.ResponseStatusException
 @RestController
 @RequestMapping("/customers")
 class CustomerController(
-    private val customerService: CustomerService,
-    private val customerRepository: CustomerRepository
+    private val customerUseCase: CustomerUseCase,
+    private val customerRepository: CustomerRepository,
+    private val presenter: CustomerPresenter
 ) {
 
     @PostMapping("/customer")
@@ -29,13 +31,13 @@ class CustomerController(
         ApiResponse(responseCode = "404", description = "When can't find a customer using the CPF number"),
         ApiResponse(responseCode = "500", description = "When it isn't possible to create the customer")
     ])
-    fun saveCustomer(@RequestBody @Valid customer: Customer): Customer {
+    fun saveCustomer(@RequestBody @Valid customer: CustomerDTO): CustomerDTO {
         if (customerRepository.existsByCpf(customer.cpf)) {
             throw ResponseStatusException(
                 HttpStatus.BAD_REQUEST, "Customer with this CPF already exists."
             )
         }
-        return customerService.saveNewCustomer(customer)
+        return presenter.toDTO(customerUseCase.saveNewCustomer(customer))
     }
 
     @GetMapping("/customer/{cpf}")
@@ -45,13 +47,13 @@ class CustomerController(
         ApiResponse(responseCode = "404", description = "When don't find a customer using the CPF number specific."),
         ApiResponse(responseCode = "500", description = "When it is not possible to find the customer.")
     ])
-    fun fetchCustomerByCpf(@PathVariable("cpf") cpf: String ) : Customer? {
+    fun fetchCustomerByCpf(@PathVariable("cpf") cpf: String ) : CustomerDTO? {
         if (!customerRepository.existsByCpf(cpf)) {
             throw ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Customer with this CPF does not exist."
             )
         }
-        return customerService.findByCpf(cpf)
+        return presenter.toDTO(customerUseCase.findByCpf(cpf))
     }
 
     @GetMapping
@@ -60,5 +62,8 @@ class CustomerController(
         ApiResponse(responseCode = "200", description = "Returns a list with all customers of database."),
         ApiResponse(responseCode = "500", description = "When it is not possible to find a list of customers.")
     ])
-    fun fetchAllCustomers(): Collection<Customer> = customerService.fetchAllCustomers()
+    fun fetchAllCustomers(): Collection<CustomerDTO> {
+        val customers = customerUseCase.fetchAllCustomers()
+        return customers.map { customer -> presenter.toDTO(customer) }
+    }
 }

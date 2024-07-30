@@ -1,8 +1,10 @@
 package com.fiap.fastfood.core.valueObject
 
 enum class Status {
-    PENDENTE,
-    PAGO,
+    PRONTO,
     EM_PREPARACAO,
-    PRONTO
+    RECEBIDO,
+    FINALIZADO,
+    PENDENTE,
+    PAGAMENTO_RECUSADO
 }
