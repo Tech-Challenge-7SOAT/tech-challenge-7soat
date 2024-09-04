@@ -1,4 +1,4 @@
-name: Deploy Spring App to AWS EKS
+name: Deploy
 
 on:
   push:
