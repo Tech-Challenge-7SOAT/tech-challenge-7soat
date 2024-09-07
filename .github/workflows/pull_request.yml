@@ -2,11 +2,8 @@ name: PR Validation
 
 on:
   pull_request:
-    branches: [ master ]
-
-env:
-  AWS_REGION: us-east-1
-  ECR_REPOSITORY: 064151784429.dkr.ecr.us-east-1.amazonaws.com/fastfood-api
+    branches:
+      - master
 
 jobs:
   validate:
