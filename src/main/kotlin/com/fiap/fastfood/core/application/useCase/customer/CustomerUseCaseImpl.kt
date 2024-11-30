@@ -20,11 +20,7 @@ class CustomerUseCaseImpl(
     }
 
     override fun findByCpf(cpf: String): CustomerEntity {
-        try {
-            return customerRepository.findByCpf(cpf)!!
-        } catch(e: EntityNotFoundException) {
-            throw EntityNotFoundException(e)
-        }
+        return customerRepository.findByCpf(cpf) ?: throw EntityNotFoundException()
     }
 
     override fun fetchAllCustomers(): List<CustomerEntity> {
