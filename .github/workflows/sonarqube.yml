@@ -37,5 +37,5 @@ jobs:
         run: |
           mvn clean verify sonar:sonar \
             -Dsonar.projectKey=Tech-Challenge-7SOAT_tech-challenge-7soat \
-            -Dsonar.host.url=https://sonarcloud.io/summary/overall?id=Tech-Challenge-7SOAT_tech-challenge-7soat \
+            -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${SONAR_TOKEN}
