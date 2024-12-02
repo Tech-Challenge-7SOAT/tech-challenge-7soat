@@ -1,5 +1,7 @@
 # Projeto TECH CHALLENGE
 
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Tech-Challenge-7SOAT_tech-challenge-7soat)](https://sonarcloud.io/summary/new_code?id=Tech-Challenge-7SOAT_tech-challenge-7soat)
+
 ## Descrição do Projeto
 
 Este projeto é uma aplicação de gestão de pedidos para um fastfood para atender o Tech Challenge da FIAP, desenvolvida utilizando Kotlin e Spring Boot. O objetivo principal é permitir a criação, atualização, visualização e exclusão de pedidos, clientes e produtos. A aplicação utiliza JPA para persistência de dados e oferece uma API RESTful para interações.
@@ -44,7 +46,7 @@ Antes de iniciar o projeto, você precisa instalar algumas ferramentas:
 
 ## Documentação da API
 
-### A documentação da API, gerada pelo Swagger, pode ser acessada em: 
+### A documentação da API, gerada pelo Swagger, pode ser acessada em:
 - https://{SERVICE-IP:PORT}/swagger-ui/index.html;
 - [Arquivo "swagger.yaml" no diretório "docs".](https://github.com/Tech-Challenge-7SOAT/tech-challenge-7soat/blob/master/docs/swagger.yaml)
 
@@ -58,7 +60,7 @@ Antes de iniciar o projeto, você precisa instalar algumas ferramentas:
 
 ## Product
 
-### 1.1) (POST /products/product) - Criação de um novo produto 
+### 1.1) (POST /products/product) - Criação de um novo produto
 
 Este endpoint é usado para criar um novo produto. O corpo da solicitação deve conter as informações do produto. Se o tipo de categoria for inválido ou se não for possível encontrar um produto usando a categoria fornecida, uma resposta de erro será retornada.
 
@@ -80,7 +82,7 @@ Este endpoint é usado para criar um novo produto. O corpo da solicitação deve
 
 ## Customer
 
-### 2.1) (POST /customers/customer) - Criação de um novo cliente 
+### 2.1) (POST /customers/customer) - Criação de um novo cliente
 
 Este endpoint é usado para criar um novo cliente. O corpo da solicitação deve conter as informações do cliente. Se o CPF fornecido já existir no banco de dados, uma resposta de erro será retornada.
 
@@ -96,7 +98,7 @@ Este endpoint é usado para criar um novo cliente. O corpo da solicitação deve
 
 ## Order
 
-### 3.1) (POST /orders/order) - Criar um novo pedido 
+### 3.1) (POST /orders/order) - Criar um novo pedido
 
 Este endpoint é usado para criar um novo pedido. O corpo da solicitação deve conter as informações do pedido. O CPF é necessário e se não for fornecido, ou se o cliente com o CPF fornecido não existir, ou se o produto com os IDs fornecidos não for encontrado, uma resposta de erro será retornada.
 
@@ -121,7 +123,7 @@ Este endpoint é usado para criar um novo pedido. O corpo da solicitação deve 
 
 ## Checkout
 
-### 4.1) (POST /checkout) - Realizar o checkout do carrinho de compras 
+### 4.1) (POST /checkout) - Realizar o checkout do carrinho de compras
 
 Este endpoint é usado para finalizar a compra do carrinho de compras. O corpo da solicitação deve conter as informações do carrinho de compras. Se ocorrer um erro ao realizar o checkout, uma resposta de erro será retornada.
 
@@ -129,7 +131,7 @@ Este endpoint é usado para finalizar a compra do carrinho de compras. O corpo d
 
 ## Order Payment Webhook
 
-### 5.1) (POST /webhook/payment) - Receber webhook de pagamento 
+### 5.1) (POST /webhook/payment) - Receber webhook de pagamento
 
 Este endpoint é usado para receber webhooks de pagamento. Em caso de pagamento com sucesso, o status do pedido é atualizado para "RECEBIDO". Em caso de pagamento recusado, o status é atualizado para "PAGAMENTO_RECUSADO". O corpo da solicitação deve conter as informações do pagamento. Se o pedido não for encontrado, uma resposta de erro será retornada.
 
