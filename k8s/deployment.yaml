@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-api-deployment
+  name: fastfood-api-deployment
   labels:
-    app: order-api
+    app: fastfood-api
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: order-api
+      app: fastfood-api
   template:
     metadata:
       labels:
-        app: order-api
+        app: fastfood-api
     spec:
       affinity:
         nodeAffinity:
@@ -25,8 +25,34 @@ spec:
                 - amd64
                 - arm64
       containers:
-      - name: order-api
-        image: 891376946404.dkr.ecr.us-east-1.amazonaws.com/fastfood-api-order:latest
+      - name: fastfood-api
+        image: 692348767810.dkr.ecr.us-east-1.amazonaws.com/fastfood-api/order:latest
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: database-config
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: database-config
+              key: DB_PORT
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: database-config
+              key: DB_NAME
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: database-config
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-secret
+              key: DB_PASSWORD
         resources:
             requests:
               cpu: 256m

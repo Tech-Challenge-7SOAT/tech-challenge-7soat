@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: order-api-service
+  name: fastfood-api--service
   labels:
-    app: order-api
+    app: fastfood-api
 spec:
   type: LoadBalancer
   selector:
-    app: order-api
+    app: fastfood-api
   ports:
     - protocol: TCP
       port: 80
