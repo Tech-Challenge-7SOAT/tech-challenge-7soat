@@ -18,6 +18,9 @@
 		<kotlin.version>1.9.23</kotlin.version>
 		<sonar.organization>tech-challenge-7soat</sonar.organization>
   		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.coverage.jacoco.xmlReportPaths>
+    		${project.basedir}/report-aggregate/target/site/jacoco-aggregate/jacoco.xml
+  		</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 	<dependencies>
 		<dependency>
