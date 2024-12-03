@@ -1,7 +1,5 @@
 # Projeto TECH CHALLENGE
 
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Tech-Challenge-7SOAT_tech-challenge-7soat)](https://sonarcloud.io/summary/new_code?id=Tech-Challenge-7SOAT_tech-challenge-7soat)
-
 ## Descrição do Projeto
 
 Este projeto é uma aplicação de gestão de pedidos para um fastfood para atender o Tech Challenge da FIAP, desenvolvida utilizando Kotlin e Spring Boot. O objetivo principal é permitir a criação, atualização, visualização e exclusão de pedidos, clientes e produtos. A aplicação utiliza JPA para persistência de dados e oferece uma API RESTful para interações.
