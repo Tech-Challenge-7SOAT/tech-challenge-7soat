@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: 17
-          distribution: 'temurin' # Alternative distribution options are available.
+          distribution: 'temurin'
       - name: Cache SonarQube Cloud packages
         uses: actions/cache@v4
         with:
@@ -30,8 +30,14 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Build and analyze
+      - name: Build and generate jacoco report
+        run: mvn clean verify jacoco:report
+      - name: Run SonarQube analysis
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify  org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -X -Dsonar.verbose=true -Dsonar.projectKey=Tech-Challenge-7SOAT_tech-challenge-7soat -Dsonar.exclusions=src/main/kotlin/com/fiap/fastfood/core/dto/**,src/main/kotlin/com/fiap/fastfood/entity/**,src/main/kotlin/com/fiap/fastfood/exception/**,src/main/kotlin/com/fiap/fastfood/core/valueObject/**
+        run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          -X -Dsonar.verbose=true
+          -Dsonar.projectKey=Tech-Challenge-7SOAT_tech-challenge-7soat
+          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+          -Dsonar.exclusions=src/main/kotlin/com/fiap/fastfood/core/dto/**,src/main/kotlin/com/fiap/fastfood/entity/**,src/main/kotlin/com/fiap/fastfood/exception/**,src/main/kotlin/com/fiap/fastfood/core/valueObject/**
