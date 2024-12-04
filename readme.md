@@ -1,5 +1,8 @@
 # Projeto TECH CHALLENGE
 
+## Arquitetura
+
+![Desenho de Arquitetura](image/tech-challenge-7soat.png)
 ## Descrição do Projeto
 
 Este projeto é uma aplicação de gestão de pedidos para um fastfood para atender o Tech Challenge da FIAP, desenvolvida utilizando Kotlin e Spring Boot. O objetivo principal é permitir a criação, atualização, visualização e exclusão de pedidos, clientes e produtos. A aplicação utiliza JPA para persistência de dados e oferece uma API RESTful para interações.
